@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="oryxtc" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装Docker for Debian 所需注意准备情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装Docker for Debian">
+<meta property="og:url" content="http://oryxtc.win/docker/docker/docker-an-zhuang-debian/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="安装Docker for Debian 所需注意准备情况">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-19T08:17:41.914Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装Docker for Debian">
+<meta name="twitter:description" content="安装Docker for Debian 所需注意准备情况">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/docker/docker/docker-an-zhuang-debian/"/>
+
+
+
+
+
+  <title>安装Docker for Debian | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/docker/docker/docker-an-zhuang-debian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">安装Docker for Debian</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T10:46:25+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/docker/docker/docker-an-zhuang-debian/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="docker/docker/docker-an-zhuang-debian/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  安装Docker for Debian 所需注意准备情况
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="docker安装-Debian"><a href="#docker安装-Debian" class="headerlink" title="docker安装-Debian"></a>docker安装-Debian</h1><h2 id="Debian不支持-Docker-EE-如果有旧版本就先删除-执行以下命令"><a href="#Debian不支持-Docker-EE-如果有旧版本就先删除-执行以下命令" class="headerlink" title="Debian不支持 Docker EE,如果有旧版本就先删除,执行以下命令"></a><code>Debian</code>不支持 <code>Docker EE</code>,如果有旧版本就先删除,执行以下命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io</span><br></pre></td></tr></table></figure>
+<h2 id="使用以下命令检测你Debian的版本"><a href="#使用以下命令检测你Debian的版本" class="headerlink" title="使用以下命令检测你Debian的版本"></a>使用以下命令检测你Debian的版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -cs</span><br></pre></td></tr></table></figure>
+<h2 id="查看linux内核版本-至少需要linux内核3-10版本以上-如果是Debian-Wheezy需要-3-2版本以上"><a href="#查看linux内核版本-至少需要linux内核3-10版本以上-如果是Debian-Wheezy需要-3-2版本以上" class="headerlink" title="查看linux内核版本,至少需要linux内核3.10版本以上,如果是Debian Wheezy需要 3.2版本以上"></a>查看linux内核版本,至少需要linux内核3.10版本以上,如果是<code>Debian Wheezy</code>需要 3.2版本以上</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+<h2 id="安装储存库"><a href="#安装储存库" class="headerlink" title="安装储存库"></a>安装储存库</h2><p><strong>Jessie 或者 Stretch输入:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; apt-get -y install \</span><br><span class="line">  apt-transport-https \</span><br><span class="line">  ca-certificates \</span><br><span class="line">  curl \</span><br><span class="line">  gnupg2 \</span><br><span class="line">  software-properties-common</span><br></pre></td></tr></table></figure>
+<p><strong>Wheezy:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; apt-get -y install \</span><br><span class="line">  apt-transport-https \</span><br><span class="line">  ca-certificates \</span><br><span class="line">  curl \</span><br><span class="line">  python-software-properties</span><br></pre></td></tr></table></figure>
+<h2 id="添加Docker官方GPG密钥"><a href="#添加Docker官方GPG密钥" class="headerlink" title="添加Docker官方GPG密钥:"></a>添加Docker官方GPG密钥:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; <span class="built_in">echo</span> <span class="string">"<span class="variable">$ID</span>"</span>)/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<h2 id="设置稳定版本库"><a href="#设置稳定版本库" class="headerlink" title="设置稳定版本库:"></a>设置稳定版本库:</h2><p><strong>amd64</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository \</span><br><span class="line">   <span class="string">"deb [arch=amd64] https://download.docker.com/linux/<span class="variable">$(. /etc/os-release; echo "$ID")</span> \</span></span><br><span class="line"><span class="string">   <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果出现错误提示: <code>add-apt-repository: command not found</code> 执行命令: <code>sudo apt-get install software-properties-common</code></p>
+</blockquote>
+<p><strong>armhf</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">echo</span> <span class="string">"deb [arch=armhf] https://download.docker.com/linux/<span class="variable">$(. /etc/os-release; echo "$ID")</span> \</span></span><br><span class="line"><span class="string">     <span class="variable">$(lsb_release -cs)</span> stable"</span> | \</span><br><span class="line">    sudo tee /etc/apt/sources.list.d/docker.list</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Wheezy版本才有:add-apt-repository的版本添加了一个不存在的deb-src存储库。您需要注释掉该存储库否则运行apt-get update将失败。编辑/etc/apt/sources.list。找到如下所示的行，并将其注释掉或删除它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><h3 id="更新apt软件包索引"><a href="#更新apt软件包索引" class="headerlink" title="更新apt软件包索引"></a>更新apt软件包索引</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果出现错误提示: <code>Is the package apt-transport-https installed</code> 执行命令: <code>apt-get install apt-transport-https ca-certificates</code></p>
+</blockquote>
+<h3 id="安装最新版本的docker，或者到下一步安装指定版本的docker"><a href="#安装最新版本的docker，或者到下一步安装指定版本的docker" class="headerlink" title="安装最新版本的docker，或者到下一步安装指定版本的docker"></a>安装最新版本的docker，或者到下一步安装指定版本的docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache madison docker-ce</span><br></pre></td></tr></table></figure>
+<h3 id="执行如下命令安装指定的版本："><a href="#执行如下命令安装指定的版本：" class="headerlink" title="执行如下命令安装指定的版本："></a>执行如下命令安装指定的版本：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install docker-ce=&lt;VERSION&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><h3 id="查看github中docker-compose历史版本-地址为-Compose-repository"><a href="#查看github中docker-compose历史版本-地址为-Compose-repository" class="headerlink" title="查看github中docker-compose历史版本,地址为:Compose repository"></a>查看github中docker-compose历史版本,地址为:<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Compose repository</a></h3><h3 id="通过执行以下命令下载当前版本"><a href="#通过执行以下命令下载当前版本" class="headerlink" title="通过执行以下命令下载当前版本"></a>通过执行以下命令下载当前版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/&lt;VERSION&gt;/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<h3 id="为二进制文件添加执行权限"><a href="#为二进制文件添加执行权限" class="headerlink" title="为二进制文件添加执行权限"></a>为二进制文件添加执行权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<h2 id="如果想删除docker-执行以下命令"><a href="#如果想删除docker-执行以下命令" class="headerlink" title="如果想删除docker,执行以下命令"></a>如果想删除docker,执行以下命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge docker-ce</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/laravel/laravel/shi-yong-laravel-excel-dao-ru-dao-chu-excel-csv/" rel="next" title="使用 Laravel Excel 导入导出 Excel & CSV">
+                <i class="fa fa-chevron-left"></i> 使用 Laravel Excel 导入导出 Excel & CSV
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/laravel/laravel/laravel+voyager-shi-xian-hou-tai-guan-li/" rel="prev" title="laravel+voyager实现后台管理">
+                laravel+voyager实现后台管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker安装-Debian"><span class="nav-number">1.</span> <span class="nav-text">docker安装-Debian</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Debian不支持-Docker-EE-如果有旧版本就先删除-执行以下命令"><span class="nav-number">1.1.</span> <span class="nav-text">Debian不支持 Docker EE,如果有旧版本就先删除,执行以下命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用以下命令检测你Debian的版本"><span class="nav-number">1.2.</span> <span class="nav-text">使用以下命令检测你Debian的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看linux内核版本-至少需要linux内核3-10版本以上-如果是Debian-Wheezy需要-3-2版本以上"><span class="nav-number">1.3.</span> <span class="nav-text">查看linux内核版本,至少需要linux内核3.10版本以上,如果是Debian Wheezy需要 3.2版本以上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装储存库"><span class="nav-number">1.4.</span> <span class="nav-text">安装储存库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Docker官方GPG密钥"><span class="nav-number">1.5.</span> <span class="nav-text">添加Docker官方GPG密钥:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置稳定版本库"><span class="nav-number">1.6.</span> <span class="nav-text">设置稳定版本库:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装docker"><span class="nav-number">1.7.</span> <span class="nav-text">安装docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新apt软件包索引"><span class="nav-number">1.7.1.</span> <span class="nav-text">更新apt软件包索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装最新版本的docker，或者到下一步安装指定版本的docker"><span class="nav-number">1.7.2.</span> <span class="nav-text">安装最新版本的docker，或者到下一步安装指定版本的docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行如下命令安装指定的版本："><span class="nav-number">1.7.3.</span> <span class="nav-text">执行如下命令安装指定的版本：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装docker-compose"><span class="nav-number">1.8.</span> <span class="nav-text">安装docker-compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看github中docker-compose历史版本-地址为-Compose-repository"><span class="nav-number">1.8.1.</span> <span class="nav-text">查看github中docker-compose历史版本,地址为:Compose repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过执行以下命令下载当前版本"><span class="nav-number">1.8.2.</span> <span class="nav-text">通过执行以下命令下载当前版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为二进制文件添加执行权限"><span class="nav-number">1.8.3.</span> <span class="nav-text">为二进制文件添加执行权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果想删除docker-执行以下命令"><span class="nav-number">1.9.</span> <span class="nav-text">如果想删除docker,执行以下命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/docker/docker/docker-an-zhuang-debian/';
+          this.page.identifier = 'docker/docker/docker-an-zhuang-debian/';
+          this.page.title = '安装Docker for Debian';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

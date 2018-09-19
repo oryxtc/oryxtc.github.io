@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rabbitmq," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="rabbitmq部分功能的实现方法">
+<meta name="keywords" content="rabbitmq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rabbitmq功能实现">
+<meta property="og:url" content="http://oryxtc.win/php/php/rabbitmq-gong-neng-shi-xian/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="rabbitmq部分功能的实现方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ooqid2far.bkt.clouddn.com/myblog/rabbitmq功能.png">
+<meta property="og:updated_time" content="2018-09-19T08:17:42.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rabbitmq功能实现">
+<meta name="twitter:description" content="rabbitmq部分功能的实现方法">
+<meta name="twitter:image" content="http://ooqid2far.bkt.clouddn.com/myblog/rabbitmq功能.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/php/php/rabbitmq-gong-neng-shi-xian/"/>
+
+
+
+
+
+  <title>rabbitmq功能实现 | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/php/php/rabbitmq-gong-neng-shi-xian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">rabbitmq功能实现</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T20:46:25+08:00">
+                2017-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/php/php/rabbitmq-gong-neng-shi-xian/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="php/php/rabbitmq-gong-neng-shi-xian/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  rabbitmq部分功能的实现方法
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RabitMQ功能实现"><a href="#RabitMQ功能实现" class="headerlink" title="RabitMQ功能实现"></a>RabitMQ功能实现</h1><h2 id="RabbitMQ-功能实现1"><a href="#RabbitMQ-功能实现1" class="headerlink" title="RabbitMQ 功能实现1"></a>RabbitMQ 功能实现1</h2><blockquote>
+<p>引入php-amqplib类库,类库地址为<a href="https://github.com/php-amqplib/php-amqplib" target="_blank" rel="noopener">https://github.com/php-amqplib/php-amqplib</a></p>
+</blockquote>
+<h2 id="简单的示例代码实现"><a href="#简单的示例代码实现" class="headerlink" title="简单的示例代码实现"></a>简单的示例代码实现</h2><p><img src="http://ooqid2far.bkt.clouddn.com/myblog/rabbitmq功能.png" alt=""></p>
+<ul>
+<li><p>生产者(发送消息者) </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">producer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//创建连接实例</span></span><br><span class="line">    $connection = <span class="keyword">new</span> AMQPStreamConnection(<span class="string">'127.0.0.1'</span>, <span class="number">5672</span>, <span class="string">'guest'</span>, <span class="string">'guest'</span>);</span><br><span class="line">    <span class="comment">//创建一个连接通道</span></span><br><span class="line">    $channel = $connection-&gt;channel();</span><br><span class="line">    <span class="comment">//声明队列,如果该队列不存在会创建</span></span><br><span class="line">    $channel-&gt;queue_declare(<span class="string">'hello'</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">//创建消息实例</span></span><br><span class="line">    $msg = <span class="keyword">new</span> AMQPMessage(<span class="string">'Hello World1!'</span>);</span><br><span class="line">    <span class="comment">//通过通道,推送消息到队列中</span></span><br><span class="line">    $channel-&gt;basic_publish($msg, <span class="string">''</span>, <span class="string">'hello'</span>);</span><br><span class="line">    <span class="comment">//关闭通道</span></span><br><span class="line">    $channel-&gt;close();</span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    $connection-&gt;close();</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">" [x] Sent 'Hello World!'\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消费者(获取消息者)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">consumer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//创建连接实例</span></span><br><span class="line">    $connection = <span class="keyword">new</span> AMQPStreamConnection(<span class="string">'127.0.0.1'</span>, <span class="number">5672</span>, <span class="string">'guest'</span>, <span class="string">'guest'</span>);</span><br><span class="line">    <span class="comment">//创建一个连接通道</span></span><br><span class="line">    $channel = $connection-&gt;channel();</span><br><span class="line">    <span class="comment">//声明队列,如果该队列不存在会创建</span></span><br><span class="line">    $channel-&gt;queue_declare(<span class="string">'hello'</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">//创建一个实例(这里用于回调)</span></span><br><span class="line">    $callback_model=<span class="keyword">new</span> Callback();</span><br><span class="line">    <span class="comment">//通过通道消费队列中的信息,并执行回调(这里为array($callback_model,'getQueueInfo'))</span></span><br><span class="line">    $channel-&gt;basic_consume(<span class="string">'hello'</span>, <span class="string">''</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>,<span class="keyword">array</span>($callback_model,<span class="string">'getQueueInfo'</span>));</span><br><span class="line">    <span class="comment">//当存在回调时,这里将进入无限循环,每当队列中被推送新值,就会执行回调</span></span><br><span class="line">    <span class="keyword">while</span>(count($channel-&gt;callbacks)) &#123;</span><br><span class="line">        $channel-&gt;wait();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭通道</span></span><br><span class="line">    $channel-&gt;close();</span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    $connection-&gt;close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回调方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Callback</span> <span class="keyword">extends</span> <span class="title">Model</span></span>&#123;</span><br><span class="line">  <span class="comment">//$channel-&gt;basic_consume 执行回调方法时,会传入$msg对象</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getQueueInfo</span><span class="params">($msg)</span></span>&#123;</span><br><span class="line">      <span class="comment">//我这里将$msg中的主体(队列中的消息值) 和 当前进程号 存入表中</span></span><br><span class="line">      $test_model=<span class="keyword">new</span> Table();</span><br><span class="line">      $test_model-&gt;content=$msg-&gt;body;</span><br><span class="line">      $test_model-&gt;num=getmypid();</span><br><span class="line">      $test_model-&gt;save();</span><br><span class="line">      $msg-&gt;delivery_info[<span class="string">'channel'</span>]-&gt;basic_ack($msg-&gt;delivery_info[<span class="string">'delivery_tag'</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="队列及消息的持久化设置"><a href="#队列及消息的持久化设置" class="headerlink" title="队列及消息的持久化设置"></a>队列及消息的持久化设置</h2><ul>
+<li>首先设置队列的持久化</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置第三个参数durable 为true</span></span><br><span class="line"><span class="comment">//注意:如果这里hello队列已存在,RabbitMQ不允许重新定义现有队列,并且会返回错误,这里你可以声明一个新队列</span></span><br><span class="line">$channel-&gt;queue_declare(<span class="string">'hello'</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置消息的持久化</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$msg = <span class="keyword">new</span> AMQPMessage($data,</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">'delivery_mode'</span> =&gt; <span class="number">2</span>) <span class="comment">//使消息持久化</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>虽然设置了队列和消息的持久化,但RabbitMQ可能有时只是存入缓存不是磁盘中,如果需要更强力的保障,请使用<a href="https://www.rabbitmq.com/confirms.html" target="_blank" rel="noopener"> publisher confirms</a></p>
+</blockquote>
+<h2 id="合理调度实现"><a href="#合理调度实现" class="headerlink" title="合理调度实现"></a>合理调度实现</h2><p>如果你想让工人处理并确认了当前任务后再接受新任务,需在<strong>消耗信息</strong>时设置</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置prefetch_count =1</span></span><br><span class="line">$channel-&gt;basic_qos(<span class="keyword">null</span>, <span class="number">1</span>, <span class="keyword">null</span>); <span class="comment">//参数为1 表示工人当前任务最多1个</span></span><br><span class="line">$channel-&gt;basic_consume(<span class="string">'hello'</span>, <span class="string">''</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="消息确认机制"><a href="#消息确认机制" class="headerlink" title="消息确认机制"></a>消息确认机制</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$channel-&gt;basic_consume(<span class="string">'hello'</span>, <span class="string">''</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>,<span class="keyword">array</span>($callback_model,<span class="string">'getQueueInfo'</span>));</span><br><span class="line"><span class="comment">//注意:$channel-&gt;basic_consume 的第四个参数为true时(即 no ack),则为关闭消息确认</span></span><br><span class="line"><span class="comment">//$channel-&gt;basic_consume 的第四个参数为false时,则为开启消息确认</span></span><br><span class="line"><span class="comment">//开启消息确认机制后,回调方法执行消息确认后,该信息才会被消耗. 当该工人或服务死后,未确认的信息会被再次放入到队列中</span></span><br><span class="line"><span class="comment">//回调方法中执行</span></span><br><span class="line">$msg-&gt;delivery_info[<span class="string">'channel'</span>]-&gt;basic_ack($msg-&gt;delivery_info[<span class="string">'delivery_tag'</span>]);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rabbitmq/" rel="tag"># rabbitmq</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/javascript/javascript/javascript-chang-yong-fang-fa/" rel="next" title="javascript常用方法">
+                <i class="fa fa-chevron-left"></i> javascript常用方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/php/php/rabbitmq-an-zhuang-fang-fa/" rel="prev" title="rabbitmq安装步骤">
+                rabbitmq安装步骤 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabitMQ功能实现"><span class="nav-number">1.</span> <span class="nav-text">RabitMQ功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ-功能实现1"><span class="nav-number">1.1.</span> <span class="nav-text">RabbitMQ 功能实现1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的示例代码实现"><span class="nav-number">1.2.</span> <span class="nav-text">简单的示例代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列及消息的持久化设置"><span class="nav-number">1.3.</span> <span class="nav-text">队列及消息的持久化设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合理调度实现"><span class="nav-number">1.4.</span> <span class="nav-text">合理调度实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息确认机制"><span class="nav-number">1.5.</span> <span class="nav-text">消息确认机制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/php/php/rabbitmq-gong-neng-shi-xian/';
+          this.page.identifier = 'php/php/rabbitmq-gong-neng-shi-xian/';
+          this.page.title = 'rabbitmq功能实现';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

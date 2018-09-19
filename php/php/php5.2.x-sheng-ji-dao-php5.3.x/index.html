@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="手册," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP 5.3.x 的大多数改进对现有代码没有影响。需要注意的是有一些不兼容和新功能，在生产环境中切换 PHP 版本需要先行测试代码。">
+<meta name="keywords" content="手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从 PHP 5.2.x 升级到 PHP 5.3.x">
+<meta property="og:url" content="http://oryxtc.win/php/php/php5.2.x-sheng-ji-dao-php5.3.x/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="PHP 5.3.x 的大多数改进对现有代码没有影响。需要注意的是有一些不兼容和新功能，在生产环境中切换 PHP 版本需要先行测试代码。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-19T08:17:42.081Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从 PHP 5.2.x 升级到 PHP 5.3.x">
+<meta name="twitter:description" content="PHP 5.3.x 的大多数改进对现有代码没有影响。需要注意的是有一些不兼容和新功能，在生产环境中切换 PHP 版本需要先行测试代码。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/php/php/php5.2.x-sheng-ji-dao-php5.3.x/"/>
+
+
+
+
+
+  <title>从 PHP 5.2.x 升级到 PHP 5.3.x | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/php/php/php5.2.x-sheng-ji-dao-php5.3.x/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">从 PHP 5.2.x 升级到 PHP 5.3.x</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T16:32:00+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/php/php/php5.2.x-sheng-ji-dao-php5.3.x/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="php/php/php5.2.x-sheng-ji-dao-php5.3.x/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  PHP 5.3.x 的大多数改进对现有代码没有影响。需要注意的是有一些不兼容和新功能，在生产环境中切换 PHP 版本需要先行测试代码。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="php5-2-x升级到php5-3-x"><a href="#php5-2-x升级到php5-3-x" class="headerlink" title="php5.2.x升级到php5.3.x"></a>php5.2.x升级到php5.3.x</h1><h2 id="不向下兼容的变化"><a href="#不向下兼容的变化" class="headerlink" title="不向下兼容的变化"></a>不向下兼容的变化</h2><ul>
+<li>在 PHP 5.3.x 的所有绑定扩展中应用了新的内部参数解析API, 当给函数传递了不兼容的参数时将返回 NULL. 但有一些例外，比如函数 <code>get_class()</code> 在出现错误时将会返回 FALSE.</li>
+<li><code>clearstatcache()</code> 默认不再清除缓存的 realpath.</li>
+<li><code>realpath()</code> 现在是完全与平台无关的. 结果是非法的相对路径比如 <strong>FILE</strong> . “/../x” 将不会工作.</li>
+<li><code>call_user_func()</code> 系列函数即使被调用者是一个父类也使用 $this.</li>
+<li>数组函数 <code>natsort()</code>, <code>natcasesort()</code>, <code>usort()</code>, <code>uasort()</code>, <code>uksort()</code>, <code>array_flip()</code>, 和 <code>array_unique()</code> 将不再接受对象作为参数. 在将这些函数应用于对象时, 请首先将对象转换为数组.</li>
+<li>按引用传递参数的函数在被按值传递调用时行为发生改变. 此前函数将接受按值传递的参数, 现在将抛出致命错误. 之前任何期待传递引用但是在调用时传递了常量或者字面值 的函数, 需要在调用前改为将该值赋给一个变量。</li>
+<li>新的 mysqlnd 库需要使用 MySQL 4.1 新的 41 字节密码格式。继续使用旧的 16 字节密码将导致 <code>mysql_connect()</code> 和其它类似函数 抛出 “mysqlnd cannot connect to MySQL 4.1+ using old authentication.” 错误.</li>
+<li>新的 mysqlnd 库将不再读取 MySQL 配置文件(my.cnf/my.ini), 这与旧版本的 libmysql 库不同. 如果你的代码依赖于这些配置 文件, 你可以使用 <code>mysqli_options()</code> 显式地加载它. 注意, 这意味着如果 PDO 中的 MySQL 支持使用了 mysqlnd 进行编译，PDO 特有常量 <code>PDO::MYSQL_ATTR_READ_DEFAULT_FILE</code> 和 <code>PDO::MYSQL_ATTR_READ_DEFAULT_GROUP</code> 将是未定义的.</li>
+<li><code>SplFileInfo</code> 及其相关目录类会移除末尾的 /.</li>
+<li><code>__toString</code> 魔术方法不再接受参数.</li>
+<li>魔术方法 <code>__get</code>, <code>__set</code>, <code>__isset</code>, <code>__unset</code>, and <code>__call</code> 应该总是公共的(public)且不能是静态的(static). 方法签名是必须的.</li>
+<li>现在 <code>__call</code> 魔术方法在访问私有的(private)和被保护的(protected)方法时被调用.</li>
+<li>函数内 <code>include</code> 或者 <code>require</code> 一个文件时，文件内 将不能使用 <code>func_get_arg()</code>, <code>func_get_args()</code> 和 <code>func_num_args()</code> 函数。</li>
+<li>新增了一个包裹在 MHASH 扩展外面的仿真层。但是并非所有的算法都涉及到了，值得注意的是 s2k 哈希算法。这意味着 s2k 哈希算法在 PHP 5.3.0 中不再可用。</li>
+</ul>
+<h2 id="增加的新特性"><a href="#增加的新特性" class="headerlink" title="增加的新特性"></a>增加的新特性</h2><ul>
+<li>添加了命名空间的支持.</li>
+<li>添加了静态晚绑定支持.</li>
+<li>添加了跳标签支持.</li>
+<li>添加了原生的闭包(Lambda/匿名函数)支持.</li>
+<li>新增了两个魔术方法, <strong>callStatic 和</strong> invoke.</li>
+<li>添加了 Nowdoc 语法支持, 类似于 Heredoc 语法, 但是包含单引号.</li>
+<li>使用 Heredoc 来初始化静态变量和类属性/常量变为可能.</li>
+<li>可使用双引号声明 Heredoc, 补充了 Nowdoc 语法.</li>
+<li>可在类外部使用 const 关键词声明 常量.</li>
+<li>三元运算操作符有了简写形式: ?:.</li>
+<li>HTTP 流包裹器将从 200 到 399 全部的状态码都视为成功。</li>
+<li>动态访问静态方法变为可能.</li>
+<li>异常可以被内嵌.</li>
+<li>新增了循环引用的垃圾回收器并且默认是开启的.</li>
+<li>mail() 现在支持邮件发送日志. (注意: 仅支持通过该函数发送的邮件.)</li>
+</ul>
+<h2 id="PHP-5-3-x-中弃用的功能"><a href="#PHP-5-3-x-中弃用的功能" class="headerlink" title="PHP 5.3.x 中弃用的功能"></a>PHP 5.3.x 中弃用的功能</h2><h3 id="下面是被弃用的-INI-指令列表-使用下面任何指令都将导致-E-DEPRECATED-错误"><a href="#下面是被弃用的-INI-指令列表-使用下面任何指令都将导致-E-DEPRECATED-错误" class="headerlink" title="下面是被弃用的 INI 指令列表. 使用下面任何指令都将导致 E_DEPRECATED 错误."></a>下面是被弃用的 INI 指令列表. 使用下面任何指令都将导致 E_DEPRECATED 错误.</h3><ul>
+<li><code>define_syslog_variables</code></li>
+<li><code>register_globals</code></li>
+<li><code>register_long_arrays</code></li>
+<li><code>safe_mode</code></li>
+<li><code>magic_quotes_gpc</code></li>
+<li><code>magic_quotes_runtime</code></li>
+<li><code>magic_quotes_sybase</code></li>
+<li>弃用 INI 文件中以 ‘#‘ 开头的注释.</li>
+</ul>
+<h3 id="弃用函数"><a href="#弃用函数" class="headerlink" title="弃用函数"></a>弃用函数</h3><ul>
+<li><code>call_user_method()</code> (使用 <code>call_user_func()</code> 替代)</li>
+<li><code>call_user_method_array()</code> (使用 <code>call_user_func_array()</code> 替代)</li>
+<li><code>define_syslog_variables()</code></li>
+<li><code>dl()</code></li>
+<li><code>ereg()</code> (使用 <code>preg_match()</code> 替代)</li>
+<li><code>ereg_replace()</code> (使用 <code>preg_replace()</code> 替代)</li>
+<li><code>eregi()</code> (使用 <code>preg_match()</code> 配合 ‘i’ 修正符替代)</li>
+<li><code>eregi_replace()</code> (使用 <code>preg_replace()</code> 配合 ‘i’ 修正符替代)</li>
+<li><code>set_magic_quotes_runtime()</code> 以及它的别名函数 <code>magic_quotes_runtime()</code></li>
+<li><code>session_register()</code> (使用 <code>$_SESSION</code> 超全部变量替代)</li>
+<li><code>session_unregister()</code> (使用 <code>$_SESSION</code> 超全部变量替代)</li>
+<li><code>session_is_registered()</code> (使用 <code>$_SESSION</code> 超全部变量替代)</li>
+<li><code>set_socket_blocking()</code> (使用 <code>stream_set_blocking()</code> 替代)</li>
+<li><code>split()</code> (使用 <code>preg_split()</code> 替代)</li>
+<li><code>spliti()</code> (使用 <code>preg_split()</code> 配合 ‘i’ 修正符替代)</li>
+<li><code>sql_regcase()</code></li>
+<li><code>mysql_db_query()</code> (使用 <code>mysql_select_db()</code> 和 <code>mysql_query()</code> 替代)</li>
+<li><code>mysql_escape_string()</code> (使用 <code>mysql_real_escape_string()</code> 替代)</li>
+<li>废弃以字符串传递区域设置名称. 使用 LC_* 系列常量替代.</li>
+<li><code>mktime()</code> 的 is_dst 参数. 使用新的时区处理函数替代.</li>
+</ul>
+<h2 id="PHP-5-3-x-保留的功能"><a href="#PHP-5-3-x-保留的功能" class="headerlink" title="PHP 5.3.x 保留的功能"></a>PHP 5.3.x 保留的功能</h2><ul>
+<li><code>is_a()</code> 函数被保留. 它不再抛出 E_STRICT 错误.</li>
+</ul>
+<h2 id="PHP-5-3-x-新参数"><a href="#PHP-5-3-x-新参数" class="headerlink" title="PHP 5.3.x 新参数"></a>PHP 5.3.x 新参数</h2><h3 id="PHP核心"><a href="#PHP核心" class="headerlink" title="PHP核心"></a>PHP核心</h3><ul>
+<li><code>clearstatcache()</code> - 新增 clear_realpath_cache 和 filename 参数.</li>
+<li><code>copy()</code> - 新增流环境参数 context.</li>
+<li><code>fgetcsv()</code> - 新增 escape 参数.</li>
+<li><code>ini_get_all()</code> - 新增 details 参数.</li>
+<li><code>nl2br()</code> - 新增 is_xhtml 参数.</li>
+<li>parse_ini_file()` - 新增 scanner_mode 参数.</li>
+<li><code>round()</code> - 新增 mode 参数.</li>
+<li><code>stream_context_create()</code> - 新增 params 参数.</li>
+<li><code>strstr()</code> 和 <code>stristr()</code> - 新增 before_needle 参数.</li>
+</ul>
+<h3 id="json"><a href="#json" class="headerlink" title="json:"></a>json:</h3><ul>
+<li><code>json_encode()</code> - 新增 options 参数.</li>
+<li><code>json_decode()</code> - 新增 depth 参数.</li>
+</ul>
+<h3 id="流-Streams"><a href="#流-Streams" class="headerlink" title="流(Streams):"></a>流(Streams):</h3><ul>
+<li><code>stream_select()</code>, <code>stream_set_blocking()</code>, <code>stream_set_timeout()</code>, 和 <code>stream_set_write_buffer()</code> 使用用户空间流包裹器.</li>
+</ul>
+<h3 id="sybase-ct"><a href="#sybase-ct" class="headerlink" title="sybase_ct:"></a>sybase_ct:</h3><ul>
+<li><code>sybase_connect()</code> - 新增 new 参数.</li>
+</ul>
+<h2 id="PHP-5-3-x-新函数"><a href="#PHP-5-3-x-新函数" class="headerlink" title="PHP 5.3.x 新函数"></a>PHP 5.3.x 新函数</h2><h3 id="PHP-核心"><a href="#PHP-核心" class="headerlink" title="PHP 核心"></a>PHP 核心</h3><ul>
+<li><code>array_replace()</code> - 将一个数组的元素用另外一个数组的元素进行替换.</li>
+<li><code>array_replace_recursive()</code> - 将一个数组的元素用一组传递进来的数组进行递归替换.</li>
+<li><code>class_alias()</code> - 为用户定义的类创建一个别名.</li>
+<li><code>forward_static_call()</code> - 从一个方法环境调用一个用户函数.</li>
+<li><code>forward_static_call_array()</code> - 从一个方法环境调用一个用户函数, 使用数组中的元素作为参数.</li>
+<li><code>gc_collect_cycles()</code> - 强制收集任何存在的废物循环.</li>
+<li><code>gc_disable()</code> - 撤销循环引用收集器.</li>
+<li><code>gc_enable()</code> - 激活循环引用收集器.</li>
+<li><code>gc_enabled()</code> - 返回循环引用收集器的状态.</li>
+<li><code>get_called_class()</code> - 返回调用的静态方法所在的类的名称.</li>
+<li><code>gethostname()</code> - 返回本地机器的当前主机名.</li>
+<li><code>header_remove()</code> - 在使用 <code>header()</code> 函数之前移除 HTTP Header.</li>
+<li><code>lcfirst()</code> - 蒋某一字符串第一个字符转化为小写.</li>
+<li><code>parse_ini_string()</code> - 解析配置字符串.</li>
+<li><code>quoted_printable_encode()</code> - 转换 8 位的字符串为引用的可打印字符串.</li>
+<li><code>str_getcsv()</code> - 将 CSV 字符串解析为数组.</li>
+<li><code>stream_context_set_default()</code> - 设置默认的流环境.</li>
+<li><code>stream_supports_lock()</code> - 如果流支持锁定则返回 TRUE.</li>
+<li><code>stream_context_get_params()</code> - 获取一个流环境的参数.</li>
+<li><code>streamWrapper::stream_cast()</code> - 获取底层的流资源.</li>
+<li><code>streamWrapper::stream_set_option()</code> - 更改流选项</li>
+</ul>
+<h3 id="Date-Time"><a href="#Date-Time" class="headerlink" title="Date/Time:"></a>Date/Time:</h3><ul>
+<li><code>date_add()</code> - 向 DateTime 对象增加一定数量的天, 月, 年, 小时, 分钟和秒数.</li>
+<li><code>date_create_from_format()</code> - 根据给定的格式, 返回一个 DateTime 对象.</li>
+<li><code>date_diff()</code> - 返回两个 DateTime 对象的不同之处.</li>
+<li><code>date_get_last_errors()</code> - 返回最后的日期/时间操作中产生的警告和错误.</li>
+<li><code>date_parse_from_format()</code> - 获取一个日期的信息.</li>
+<li><code>date_sub()</code> - 从 DateTime 对象减去一定数量的天, 月, 年, 时和秒数.</li>
+<li><code>timezone_version_get()</code> - 返回时区数据库的版本.</li>
+</ul>
+<h3 id="GMP"><a href="#GMP" class="headerlink" title="GMP:"></a>GMP:</h3><ul>
+<li><code>gmp_testbit()</code> - 测试一个比特是否被设置.</li>
+</ul>
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash:"></a>Hash:</h3><ul>
+<li><code>hash_copy()</code> - 复制哈希环境.</li>
+</ul>
+<h3 id="IMAP"><a href="#IMAP" class="headerlink" title="IMAP:"></a>IMAP:</h3><ul>
+<li><code>imap_gc()</code> - 清除 IMAP 缓存.</li>
+<li><code>imap_utf8_to_mutf7()</code> - 编码 UTF-8 字符串为改进的 UTF-7 编码.</li>
+<li><code>imap_mutf7_to_utf8()</code> - 解码改进的 UTF-7 字符串为 UTF-8 编码.</li>
+</ul>
+<h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON:"></a>JSON:</h3><ul>
+<li><code>json_last_error()</code> - 返回最后发生的 JSON 错误.</li>
+</ul>
+<h3 id="MySQL-改进"><a href="#MySQL-改进" class="headerlink" title="MySQL 改进:"></a>MySQL 改进:</h3><ul>
+<li><code>mysqli_fetch_all()</code> - 以关联数组、索引数组或者二者都有获取全部结果行.</li>
+<li><code>mysqli_get_connection_stats()</code> - 返回客户端连接的统计资料.</li>
+<li><code>mysqli_poll()</code> - 轮询连接.</li>
+<li><code>mysqli_reap_async_query()</code> - 从异步查询中获取结果.</li>
+</ul>
+<h3 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL:"></a>OpenSSL:</h3><ul>
+<li><code>openssl_random_pseudo_bytes()</code> - 返回一个以伪随机字节填充的指定长度的字符串.</li>
+</ul>
+<h3 id="PCNTL"><a href="#PCNTL" class="headerlink" title="PCNTL:"></a>PCNTL:</h3><ul>
+<li><code>pcntl_signal_dispatch()</code> - 为挂起信号调用信号处理器.</li>
+<li><code>pcntl_sigprocmask()</code> - 设置和获取阻塞信号.</li>
+<li><code>pcntl_sigtimedwait()</code> - 等待信号, 但是有超时时间.</li>
+<li><code>pcntl_sigwaitinfo()</code> - 等待信号.</li>
+</ul>
+<h3 id="PCRE"><a href="#PCRE" class="headerlink" title="PCRE:"></a>PCRE:</h3><ul>
+<li><code>preg_filter()</code> - 执行正则查找和替换, 仅仅返回匹配正则的结果.</li>
+</ul>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号:"></a>信号:</h3><ul>
+<li><code>msg_queue_exists()</code> - 检查消息队列是否存在.</li>
+<li><code>shm_has_var()</code> - 检查在一个共享内存段中, 是否存在指定的键(key).</li>
+</ul>
+<h3 id="以下函数被原生支持-因此它们在所有运行-PHP-的操作系统上均可用"><a href="#以下函数被原生支持-因此它们在所有运行-PHP-的操作系统上均可用" class="headerlink" title="以下函数被原生支持, 因此它们在所有运行 PHP 的操作系统上均可用."></a>以下函数被原生支持, 因此它们在所有运行 PHP 的操作系统上均可用.</h3><ul>
+<li><code>acosh()</code></li>
+<li><code>asinh()</code></li>
+<li><code>atanh()</code></li>
+<li><code>expm1()</code></li>
+<li><code>log1p()</code></li>
+</ul>
+<h2 id="新的流包装器"><a href="#新的流包装器" class="headerlink" title="新的流包装器"></a>新的流包装器</h2><ul>
+<li>glob://</li>
+<li>phar://</li>
+</ul>
+<h2 id="新的流过滤器"><a href="#新的流过滤器" class="headerlink" title="新的流过滤器"></a>新的流过滤器</h2><ul>
+<li><code>dechunk</code> (反转 HTTP 块编码)</li>
+<li><code>bz2.decompress</code> 过滤器支持连续操作.</li>
+</ul>
+<h2 id="新增的类常量"><a href="#新增的类常量" class="headerlink" title="新增的类常量"></a>新增的类常量</h2><h3 id="PDO-FIREBIRD"><a href="#PDO-FIREBIRD" class="headerlink" title="PDO_FIREBIRD:"></a>PDO_FIREBIRD:</h3><ul>
+<li><code>PDO::FB_ATTR_DATE_FORMAT</code> - 为日期设置格式.</li>
+<li><code>PDO::FB_ATTR_TIME_FORMAT</code> - 为时间设置格式.</li>
+<li><code>PDO::FB_ATTR_TIMESTAMP_FORMAT</code> - 为时间戳设置格式.</li>
+</ul>
+<h2 id="新增的方法"><a href="#新增的方法" class="headerlink" title="新增的方法"></a>新增的方法</h2><h3 id="日期-时间"><a href="#日期-时间" class="headerlink" title="日期/时间:"></a>日期/时间:</h3><ul>
+<li><code>DateTime::add()</code> - 向一个 DateTime 对象加上若干天, 月, 年, 小时, 分钟和秒.</li>
+<li><code>DateTime::createFromFormat()</code>- 根据给定的格式, 返回一个新的格式化的DateTime对象.</li>
+<li><code>DateTime::diff()</code> - 返回两个 DateTime 对象的不同之处.</li>
+<li><code>DateTime::getLastErrors()</code> - 返回最后的日期/时间处理中的警告和错误.</li>
+<li><code>DateTime::sub()</code> - 从 DateTime 对象中减去若干天, 月, 年, 小时, 分钟和秒.</li>
+</ul>
+<h3 id="异常-Exception"><a href="#异常-Exception" class="headerlink" title="异常(Exception):"></a>异常(Exception):</h3><ul>
+<li><code>Exception::getPrevious()</code> - 获取前一个异常.</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM:"></a>DOM:</h3><ul>
+<li><code>DOMNode::getLineNo()</code> - 返回解析节点的行数.</li>
+</ul>
+<h3 id="PDO-FIREBIRD-1"><a href="#PDO-FIREBIRD-1" class="headerlink" title="PDO_FIREBIRD:"></a>PDO_FIREBIRD:</h3><ul>
+<li><code>PDO::setAttribute()</code> - 设置属性.</li>
+</ul>
+<h3 id="反射-Reflection"><a href="#反射-Reflection" class="headerlink" title="反射(Reflection):"></a>反射(Reflection):</h3><ul>
+<li><code>ReflectionClass::getNamespaceName()</code> - 返回类定义所在命名空间的的名称.</li>
+<li><code>ReflectionClass::getShortName()</code> - 返回类的短名称(没有命名空间部分).</li>
+<li><code>ReflectionClass::inNamespace()</code> - 返回类是否定义于一个命名空间.</li>
+<li><code>ReflectionFunction::getNamespaceName()</code> - 返回函数定义所在命名空间的名字.</li>
+<li><code>ReflectionFunction::getShortName()</code> - 返回函数的段名称(没有命名空间部分).</li>
+<li><code>ReflectionFunction::inNamespace()</code> - 返回函数在一个命名空间中是否被定义.</li>
+<li><code>ReflectionProperty::setAccessible()</code> - 设置是否可以请求非 public 属性.</li>
+</ul>
+<h3 id="SPL"><a href="#SPL" class="headerlink" title="SPL:"></a>SPL:</h3><ul>
+<li><code>SplObjectStorage::addAll()</code> - 从另一个 SplObjectStorage 对象中新增全部元素.</li>
+<li><code>SplObjectStorage::removeAll()</code> - 从另一个 SplObjectStorage 对象中移除全部元素.</li>
+</ul>
+<h3 id="XSL"><a href="#XSL" class="headerlink" title="XSL:"></a>XSL:</h3><ul>
+<li><code>XSLTProcessor::setProfiling()</code> - 设置概况输出文件.</li>
+</ul>
+<h2 id="新增的扩展"><a href="#新增的扩展" class="headerlink" title="新增的扩展"></a>新增的扩展</h2><ul>
+<li><code>Enchant</code> - 各种拼写库的抽象层</li>
+<li><code>Fileinfo</code> - 已经被移除的 Mimetype 扩展的一个改进的、更加可靠的替代, 以 BC 为特色.</li>
+<li><code>INTL</code> - 国际化扩展. INTL 是 » ICU 库的一个包装器.</li>
+<li><code>Phar</code> - PHP 档案文件的实现.</li>
+<li><code>SQLite3</code> - 支持 SQLite version 3 数据库.</li>
+</ul>
+<h2 id="被移除的扩展"><a href="#被移除的扩展" class="headerlink" title="被移除的扩展"></a>被移除的扩展</h2><ul>
+<li><code>dbase</code> - 不再被保持</li>
+<li><code>fbsql</code> - 不再被保持</li>
+<li><code>fdf</code> - 被保持</li>
+<li><code>ming</code> - 被保持</li>
+<li><code>msql</code> - 不再被保持</li>
+<li><code>ncurses</code> - 被保存</li>
+<li><code>sybase</code> - 停用; 使用 sybase_ct 扩展代替.</li>
+<li><code>mhash</code> - 停用; 使用 hash 扩展代替. hash 全兼容 mhash; 全部使用旧函数的应用程序仍将可以工作.</li>
+</ul>
+<h2 id="扩展的其他改变"><a href="#扩展的其他改变" class="headerlink" title="扩展的其他改变"></a>扩展的其他改变</h2><h3 id="以下扩展不再能在编译配置时进行关闭"><a href="#以下扩展不再能在编译配置时进行关闭" class="headerlink" title="以下扩展不再能在编译配置时进行关闭:"></a>以下扩展不再能在编译配置时进行关闭:</h3><ul>
+<li><code>PCRE</code></li>
+<li><code>Reflection</code></li>
+<li><code>SPL</code></li>
+</ul>
+<h3 id="扩展行为和新功能的改变"><a href="#扩展行为和新功能的改变" class="headerlink" title="扩展行为和新功能的改变:"></a>扩展行为和新功能的改变:</h3><ul>
+<li><code>Datetime</code> - 获取时区时不再使用 TZ 环境变量.</li>
+<li><code>cURL</code> - cURL 支持 SSH</li>
+<li><code>Network</code> - dns_check_record() 现在返回一个额外的 “entries” 索引, 包含 TXT 元素.</li>
+<li><code>Hash</code> - SHA-224 和 salsa 哈希算法获得支持.</li>
+<li><code>mbstring</code> - 现在支持 CP850 编码.</li>
+<li><code>OCI8</code> - 在持久连接上调用 <code>oci_close()</code> 或者在作用域外引用持久连接, 将回滚任何尚未提交的事务. 为了避免意外的行为, 根据需要明确发布和回滚事务. 使用 INI 指令<code>oci8.old_oci_close_semantics</code>可以打开旧的行为. 数据库驻留连接池(DRCP)和快速应用通知(FAN)获得支持. Oracle 外部认证获得支持(除了 Windows 平台). <code>oci_bind_by_name()</code> 函数现在支持 SQLT_AFC (又称 CHAR 数据类型).</li>
+<li><code>OpenSSL</code> - 支持 OpenSSL 摘要和加密函数. 访问 DSA, RSA 和 DH 键的内部值变为可能.</li>
+<li><code>Session</code>- 当应用了 open_basedir 限制, Session 不再将 Session 文件存储在 <code>&quot;/tmp&quot;</code> 目录中, 除非 <code>&quot;/tmp&quot;</code> 目录被明确添加到许可路径列表.</li>
+<li><code>SOAP</code> 支持发送用户提供的 HTTP 头.</li>
+<li><code>MySQLi</code> 通过在主机名前面添加 “p:” 来支持持久连接.</li>
+<li><code>image</code> And <code>GD</code> <code>gd_info()</code> 函数返回的 “JPG Support” 索引变更为 “JPEG Support”.</li>
+</ul>
+<h2 id="PHP-5-3-x-新增的类"><a href="#PHP-5-3-x-新增的类" class="headerlink" title="PHP 5.3.x 新增的类"></a>PHP 5.3.x 新增的类</h2><h3 id="datetime"><a href="#datetime" class="headerlink" title="datetime:"></a><code>datetime</code>:</h3><ul>
+<li><code>DateInterval</code></li>
+<li><code>DatePeriod</code></li>
+</ul>
+<h3 id="Phar"><a href="#Phar" class="headerlink" title="Phar:"></a>Phar:</h3><ul>
+<li><code>Phar</code></li>
+<li><code>PharData</code></li>
+<li><code>PharException</code></li>
+<li><code>PharFileInfo</code></li>
+</ul>
+<h3 id="SPL-1"><a href="#SPL-1" class="headerlink" title="SPL:"></a>SPL:</h3><ul>
+<li><code>FilesystemIterator</code></li>
+<li><code>GlobIterator</code></li>
+<li><code>MultipleIterator</code></li>
+<li><code>RecursiveTreeIterator</code></li>
+<li><code>SplDoublyLinkedList</code></li>
+<li><code>SplFixedArray</code></li>
+<li><code>SplHeap</code></li>
+<li><code>SplMaxHeap</code></li>
+<li><code>SplMinHeap</code></li>
+<li><code>SplPriorityQueue</code></li>
+<li><code>SplQueue</code></li>
+<li><code>SplStack</code></li>
+</ul>
+<h2 id="新的全局变量"><a href="#新的全局变量" class="headerlink" title="新的全局变量"></a>新的全局变量</h2><h4 id="PHP-核心-1"><a href="#PHP-核心-1" class="headerlink" title="PHP 核心:"></a>PHP 核心:</h4><ul>
+<li><code>__DIR__</code></li>
+<li><code>__NAMESPACE__</code></li>
+<li><code>E_DEPRECATED</code></li>
+<li><code>E_USER_DEPRECATED</code></li>
+<li><code>INI_SCANNER_NORMAL</code></li>
+<li><code>INI_SCANNER_RAW</code></li>
+<li><code>PHP_MAXPATHLEN</code></li>
+<li><code>PHP_WINDOWS_NT_DOMAIN_CONTROLLER</code></li>
+<li><code>PHP_WINDOWS_NT_SERVER</code></li>
+<li><code>PHP_WINDOWS_NT_WORKSTATION</code></li>
+<li><code>PHP_WINDOWS_VERSION_BUILD</code></li>
+<li><code>PHP_WINDOWS_VERSION_MAJOR</code></li>
+<li><code>PHP_WINDOWS_VERSION_MINOR</code></li>
+<li><code>PHP_WINDOWS_VERSION_PLATFORM</code></li>
+<li><code>PHP_WINDOWS_VERSION_PRODUCTTYPE</code></li>
+<li><code>PHP_WINDOWS_VERSION_SP_MAJOR</code></li>
+<li><code>PHP_WINDOWS_VERSION_SP_MINOR</code></li>
+<li><code>PHP_WINDOWS_VERSION_SUITEMASK</code></li>
+</ul>
+<h3 id="cURL"><a href="#cURL" class="headerlink" title="cURL:"></a>cURL:</h3><ul>
+<li><code>CURLOPT_PROGRESSFUNCTION</code></li>
+</ul>
+<h3 id="GD"><a href="#GD" class="headerlink" title="GD:"></a>GD:</h3><ul>
+<li><code>IMG_FILTER_PIXELATE</code></li>
+</ul>
+<h3 id="JSON-1"><a href="#JSON-1" class="headerlink" title="JSON:"></a>JSON:</h3><ul>
+<li><code>JSON_ERROR_CTRL_CHAR</code></li>
+<li><code>JSON_ERROR_DEPTH</code></li>
+<li><code>JSON_ERROR_NONE</code></li>
+<li><code>JSON_ERROR_STATE_MISMATCH</code></li>
+<li><code>JSON_ERROR_SYNTAX</code></li>
+<li><code>JSON_FORCE_OBJECT</code></li>
+<li><code>JSON_HEX_TAG</code></li>
+<li><code>JSON_HEX_AMP</code></li>
+<li><code>JSON_HEX_APOS</code></li>
+<li><code>JSON_HEX_QUOT</code></li>
+</ul>
+<h3 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP:"></a>LDAP:</h3><ul>
+<li><code>LDAP_OPT_NETWORK_TIMEOUT</code></li>
+</ul>
+<h3 id="libxml"><a href="#libxml" class="headerlink" title="libxml:"></a>libxml:</h3><ul>
+<li><code>LIBXML_LOADED_VERSION</code></li>
+</ul>
+<h3 id="PCRE-1"><a href="#PCRE-1" class="headerlink" title="PCRE:"></a>PCRE:</h3><ul>
+<li><code>PREG_BAD_UTF8_OFFSET_ERROR</code></li>
+</ul>
+<h3 id="PCNTL-1"><a href="#PCNTL-1" class="headerlink" title="PCNTL:"></a>PCNTL:</h3><ul>
+<li><code>BUS_ADRALN</code></li>
+<li><code>BUS_ADRERR</code></li>
+<li><code>BUS_OBJERR</code></li>
+<li><code>CLD_CONTIUNED</code></li>
+<li><code>CLD_DUMPED</code></li>
+<li><code>CLD_EXITED</code></li>
+<li><code>CLD_KILLED</code></li>
+<li><code>CLD_STOPPED</code></li>
+<li><code>CLD_TRAPPED</code></li>
+<li><code>FPE_FLTDIV</code></li>
+<li><code>FPE_FLTINV</code></li>
+<li><code>FPE_FLTOVF</code></li>
+<li><code>FPE_FLTRES</code></li>
+<li><code>FPE_FLTSUB</code></li>
+<li><code>FPE_FLTUND</code></li>
+<li><code>FPE_INTDIV</code></li>
+<li><code>FPE_INTOVF</code></li>
+<li><code>ILL_BADSTK</code></li>
+<li><code>ILL_COPROC</code></li>
+<li><code>ILL_ILLADR</code></li>
+<li><code>ILL_ILLOPC</code></li>
+<li><code>ILL_ILLOPN</code></li>
+<li><code>ILL_ILLTRP</code></li>
+<li><code>ILL_PRVOPC</code></li>
+<li><code>ILL_PRVREG</code></li>
+<li><code>POLL_ERR</code></li>
+<li><code>POLL_HUP</code></li>
+<li><code>POLL_IN</code></li>
+<li><code>POLL_MSG</code></li>
+<li><code>POLL_OUT</code></li>
+<li><code>POLL_PRI</code></li>
+<li><code>SEGV_ACCERR</code></li>
+<li><code>SEGV_MAPERR</code></li>
+<li><code>SI_ASYNCIO</code></li>
+<li><code>SI_KERNEL</code></li>
+<li><code>SI_MESGQ</code></li>
+<li><code>SI_NOINFO</code></li>
+<li><code>SI_QUEUE</code></li>
+<li><code>SI_SIGIO</code></li>
+<li><code>SI_TIMER</code></li>
+<li><code>SI_TKILL</code></li>
+<li><code>SI_USER</code></li>
+<li><code>SIG_BLOCK</code></li>
+<li><code>SIG_SETMASK</code></li>
+<li><code>SIG_UNBLOCK</code></li>
+<li><code>TRAP_BRKPT</code></li>
+<li><code>TRAP_TRACE</code></li>
+</ul>
+<h2 id="INI-文件处理改变"><a href="#INI-文件处理改变" class="headerlink" title="INI 文件处理改变"></a>INI 文件处理改变</h2><h3 id="PHP-5-3-0-显著改进了-INI-文件的性能和解析-并且新增了若干语法功能"><a href="#PHP-5-3-0-显著改进了-INI-文件的性能和解析-并且新增了若干语法功能" class="headerlink" title="PHP 5.3.0 显著改进了 INI 文件的性能和解析, 并且新增了若干语法功能."></a>PHP 5.3.0 显著改进了 INI 文件的性能和解析, 并且新增了若干语法功能.</h3><ul>
+<li>标准的 <code>php.ini</code> 文件被重新组织和命名. <code>php.ini-development</code> 包含在开发环境中推荐使用的设置. <code>php.ini-production</code> 包含在生产环境中推荐使用的设置.</li>
+<li>支持两个特殊章节: [PATH=/opt/httpd/www.example.com/] 和 [HOST=www.example.com]. 这两个章节里的指令不能被用户定义的 INI 文件或者运行时覆盖. 关于这些章节的更多信息, 可以这里找到.</li>
+<li>移除了 <code>zend_extension_debug</code> and <code>zend_extension_ts</code>. 使用 <code>zend_extension</code> 指令来加载全部 Zend 扩展.</li>
+<li>移除了 <code>zend.ze1_compatibility_mode</code>. 如果该 INI 指令被设置为 On, 启动时将抛出 E_ERROR 级别错误.</li>
+<li>在 “extension” 指令中可以使用全路径来加载模块.</li>
+<li>“ini变量” 现在几乎在 php.ini 文件的任何地方都可以使用.</li>
+<li>可以在运行时收紧 <code>open_basedir</code> 限制条件.</li>
+<li>可以在 INI 选项数组中使用字母数字或者变量.</li>
+<li><code>get_cfg_var()</code> 现在可以返回 “数组(array)“ INI 选项.</li>
+<li>添加了一个新指令 <code>mail.add_x_header</code>.</li>
+<li><code>user_ini.filename</code> 是新增的</li>
+<li><code>user_ini.cache_ttl</code> 也是新增的.</li>
+<li><code>exit_on_timeout</code> 也是新增的.</li>
+<li><code>open_basedir</code> 现在是 <code>PHP_INI_ALL</code> 的.</li>
+</ul>
+<h3 id="新增以下指令"><a href="#新增以下指令" class="headerlink" title="新增以下指令:"></a>新增以下指令:</h3><ul>
+<li>新的 <code>.htaccess-style</code> 用户 INI 文件机制中的 <code>user_ini.filename</code> 和 <code>user_ini.cache_ttl</code>.</li>
+<li>新增 <code>mbstring.http_output_conv_mimetype</code>. 该指令指定了 <code>mb_output_handler()</code> 激活内容类型的正则表达式.</li>
+<li>新增 <code>request_order</code>. 允许控制哪些外部变量在 <code>$_REQUEST</code> 中可用.</li>
+</ul>
+<h3 id="以下-ini-指令默认值更新"><a href="#以下-ini-指令默认值更新" class="headerlink" title="以下 ini 指令默认值更新:"></a>以下 ini 指令默认值更新:</h3><ul>
+<li><code>session.use_only_cookies</code> 默认被设置为 “1”(打开).</li>
+<li><code>oci8.default_prefetch</code> 变更为从 “10” 到 “100”.</li>
+</ul>
+<h2 id="其他改变"><a href="#其他改变" class="headerlink" title="其他改变"></a>其他改变</h2><ul>
+<li><code>SplFileInfo::getpathinfo()</code> 现在返回 <code>path name</code> 信息.</li>
+<li><code>SplObjectStorage</code> 现在支持 <code>ArrayAccess</code>. 现在可以在 <code>SplObjectStorage</code> 中存储关联信息对象.</li>
+<li>在 <code>GD</code> 扩展中, 通过 <code>imagefilter()</code> 函数, 可以提供像素支持.</li>
+<li><code>var_dump()</code> 的输出现在包含对象的私有属性.</li>
+<li>如果会话启动失败, <code>session_start()</code> 现在将返回 FALSE.</li>
+<li><code>property_exists()</code> 可以检查一个属性的存在性, 而不管它的访问控制类型(类似于 <code>method_exists()</code>).</li>
+<li><code>include_path</code> 现在可以使用Stream 包装器.</li>
+<li><code>array_reduce()</code> 函数的 <code>initial</code> 参数现在可以是任何类型.</li>
+<li>如果没有明确传递上下文环境, 目录函数 <code>opendir()</code>, <code>scandir()</code>, 和 <code>dir()</code> 将使用默认的流上下文环境.</li>
+<li><code>crypt()</code> 函数支持 <code>Blowfish</code> 和 <code>DES</code> 算法, 并且 <code>crypt</code>() 的特点是非常便捷. PHP 有它自己内部的算法实现, 不管是否找到 <code>crypt</code> 或 <code>crypt_r</code>.</li>
+<li>在全部平台上, <code>getopt()</code> 开始接受”长选项”. 可选值和作为短选项分隔符的 = 被支持.</li>
+<li><code>fopen()</code> 新增了一个模式选项(n), 它传递 <code>O_NONBLOCK</code> 常量给底层的 <code>open()</code> 系统调用. 注意, Windows 上该模式尚未得到支持.</li>
+<li><code>getimagesize()</code> 现在支持 <code>icon</code> 文件 (.ico).</li>
+<li><code>mhash</code> 扩展已经移动至 PECL, 但如果 PHP 使用 <code>--with-mhash</code> 选项参数进行编译, Hash 扩展也将提供 mhash 支持. 注意, 不管是否开启 mhash 算法, Hash 扩展都无需 mhash 库可用.</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/手册/" rel="tag"># 手册</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/laravel/laravel/laravel+voyager-shi-xian-hou-tai-guan-li/" rel="next" title="laravel+voyager实现后台管理">
+                <i class="fa fa-chevron-left"></i> laravel+voyager实现后台管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/linux/github自动部署/" rel="prev" title="github自动部署">
+                github自动部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php5-2-x升级到php5-3-x"><span class="nav-number">1.</span> <span class="nav-text">php5.2.x升级到php5.3.x</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不向下兼容的变化"><span class="nav-number">1.1.</span> <span class="nav-text">不向下兼容的变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加的新特性"><span class="nav-number">1.2.</span> <span class="nav-text">增加的新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-5-3-x-中弃用的功能"><span class="nav-number">1.3.</span> <span class="nav-text">PHP 5.3.x 中弃用的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是被弃用的-INI-指令列表-使用下面任何指令都将导致-E-DEPRECATED-错误"><span class="nav-number">1.3.1.</span> <span class="nav-text">下面是被弃用的 INI 指令列表. 使用下面任何指令都将导致 E_DEPRECATED 错误.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弃用函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">弃用函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-5-3-x-保留的功能"><span class="nav-number">1.4.</span> <span class="nav-text">PHP 5.3.x 保留的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-5-3-x-新参数"><span class="nav-number">1.5.</span> <span class="nav-text">PHP 5.3.x 新参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP核心"><span class="nav-number">1.5.1.</span> <span class="nav-text">PHP核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json"><span class="nav-number">1.5.2.</span> <span class="nav-text">json:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流-Streams"><span class="nav-number">1.5.3.</span> <span class="nav-text">流(Streams):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sybase-ct"><span class="nav-number">1.5.4.</span> <span class="nav-text">sybase_ct:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-5-3-x-新函数"><span class="nav-number">1.6.</span> <span class="nav-text">PHP 5.3.x 新函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP-核心"><span class="nav-number">1.6.1.</span> <span class="nav-text">PHP 核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Date-Time"><span class="nav-number">1.6.2.</span> <span class="nav-text">Date/Time:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GMP"><span class="nav-number">1.6.3.</span> <span class="nav-text">GMP:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">1.6.4.</span> <span class="nav-text">Hash:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMAP"><span class="nav-number">1.6.5.</span> <span class="nav-text">IMAP:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON"><span class="nav-number">1.6.6.</span> <span class="nav-text">JSON:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-改进"><span class="nav-number">1.6.7.</span> <span class="nav-text">MySQL 改进:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSSL"><span class="nav-number">1.6.8.</span> <span class="nav-text">OpenSSL:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCNTL"><span class="nav-number">1.6.9.</span> <span class="nav-text">PCNTL:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCRE"><span class="nav-number">1.6.10.</span> <span class="nav-text">PCRE:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号"><span class="nav-number">1.6.11.</span> <span class="nav-text">信号:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以下函数被原生支持-因此它们在所有运行-PHP-的操作系统上均可用"><span class="nav-number">1.6.12.</span> <span class="nav-text">以下函数被原生支持, 因此它们在所有运行 PHP 的操作系统上均可用.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的流包装器"><span class="nav-number">1.7.</span> <span class="nav-text">新的流包装器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的流过滤器"><span class="nav-number">1.8.</span> <span class="nav-text">新的流过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的类常量"><span class="nav-number">1.9.</span> <span class="nav-text">新增的类常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PDO-FIREBIRD"><span class="nav-number">1.9.1.</span> <span class="nav-text">PDO_FIREBIRD:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的方法"><span class="nav-number">1.10.</span> <span class="nav-text">新增的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期-时间"><span class="nav-number">1.10.1.</span> <span class="nav-text">日期/时间:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常-Exception"><span class="nav-number">1.10.2.</span> <span class="nav-text">异常(Exception):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM"><span class="nav-number">1.10.3.</span> <span class="nav-text">DOM:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PDO-FIREBIRD-1"><span class="nav-number">1.10.4.</span> <span class="nav-text">PDO_FIREBIRD:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射-Reflection"><span class="nav-number">1.10.5.</span> <span class="nav-text">反射(Reflection):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPL"><span class="nav-number">1.10.6.</span> <span class="nav-text">SPL:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSL"><span class="nav-number">1.10.7.</span> <span class="nav-text">XSL:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的扩展"><span class="nav-number">1.11.</span> <span class="nav-text">新增的扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#被移除的扩展"><span class="nav-number">1.12.</span> <span class="nav-text">被移除的扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展的其他改变"><span class="nav-number">1.13.</span> <span class="nav-text">扩展的其他改变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以下扩展不再能在编译配置时进行关闭"><span class="nav-number">1.13.1.</span> <span class="nav-text">以下扩展不再能在编译配置时进行关闭:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展行为和新功能的改变"><span class="nav-number">1.13.2.</span> <span class="nav-text">扩展行为和新功能的改变:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-5-3-x-新增的类"><span class="nav-number">1.14.</span> <span class="nav-text">PHP 5.3.x 新增的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#datetime"><span class="nav-number">1.14.1.</span> <span class="nav-text">datetime:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phar"><span class="nav-number">1.14.2.</span> <span class="nav-text">Phar:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPL-1"><span class="nav-number">1.14.3.</span> <span class="nav-text">SPL:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的全局变量"><span class="nav-number">1.15.</span> <span class="nav-text">新的全局变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-核心-1"><span class="nav-number">1.15.0.1.</span> <span class="nav-text">PHP 核心:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cURL"><span class="nav-number">1.15.1.</span> <span class="nav-text">cURL:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GD"><span class="nav-number">1.15.2.</span> <span class="nav-text">GD:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-1"><span class="nav-number">1.15.3.</span> <span class="nav-text">JSON:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDAP"><span class="nav-number">1.15.4.</span> <span class="nav-text">LDAP:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libxml"><span class="nav-number">1.15.5.</span> <span class="nav-text">libxml:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCRE-1"><span class="nav-number">1.15.6.</span> <span class="nav-text">PCRE:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCNTL-1"><span class="nav-number">1.15.7.</span> <span class="nav-text">PCNTL:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INI-文件处理改变"><span class="nav-number">1.16.</span> <span class="nav-text">INI 文件处理改变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP-5-3-0-显著改进了-INI-文件的性能和解析-并且新增了若干语法功能"><span class="nav-number">1.16.1.</span> <span class="nav-text">PHP 5.3.0 显著改进了 INI 文件的性能和解析, 并且新增了若干语法功能.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增以下指令"><span class="nav-number">1.16.2.</span> <span class="nav-text">新增以下指令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以下-ini-指令默认值更新"><span class="nav-number">1.16.3.</span> <span class="nav-text">以下 ini 指令默认值更新:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他改变"><span class="nav-number">1.17.</span> <span class="nav-text">其他改变</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/php/php/php5.2.x-sheng-ji-dao-php5.3.x/';
+          this.page.identifier = 'php/php/php5.2.x-sheng-ji-dao-php5.3.x/';
+          this.page.title = '从 PHP 5.2.x 升级到 PHP 5.3.x';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

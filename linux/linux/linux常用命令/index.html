@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="oryxtc" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="归纳总结了一些linux常用命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="http://oryxtc.win/linux/linux/linux常用命令/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="归纳总结了一些linux常用命令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-19T08:17:41.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用命令">
+<meta name="twitter:description" content="归纳总结了一些linux常用命令">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/linux/linux/linux常用命令/"/>
+
+
+
+
+
+  <title>linux常用命令 | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/linux/linux/linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">linux常用命令</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-12T20:46:25+08:00">
+                2017-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/linux/linux/linux常用命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="linux/linux/linux常用命令/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  归纳总结了一些linux常用命令
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="文件、目录类"><a href="#文件、目录类" class="headerlink" title="文件、目录类"></a>文件、目录类</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cd</td>
+<td># 返回 home 目录（相当于cd ~）</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td># 返回上一级目录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td># 返回上一次所在目录,并显示其目录名</td>
+</tr>
+<tr>
+<td>cd xxx</td>
+<td># 进入到指定目录xxx</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td># 显示当前目录的绝对路径</td>
+</tr>
+<tr>
+<td>ls -l</td>
+<td># 列出文件的详细信息，相当于（ll）</td>
+</tr>
+<tr>
+<td>ls \</td>
+<td>grep “xxx”</td>
+<td># 列出包含 “xxx” 关键字的文件</td>
+</tr>
+<tr>
+<td>mkdir dir</td>
+<td># 创建一个目录</td>
+</tr>
+<tr>
+<td>mkdir -p dir/dir</td>
+<td># 创建多级目录</td>
+</tr>
+<tr>
+<td>mkdir -m 777 dir</td>
+<td># 创建权限为 777 的目录</td>
+</tr>
+<tr>
+<td>touch file</td>
+<td># 创建新的空文件</td>
+</tr>
+<tr>
+<td>rmdir dir</td>
+<td># 删除空目录</td>
+</tr>
+<tr>
+<td>rmdir -p dir/bin</td>
+<td># 删除子空目录 bin 和其父空目录 dir</td>
+</tr>
+<tr>
+<td>rm -rf dir/bin</td>
+<td># 删除一个目录中的一个或多个文件或目录（慎用）</td>
+</tr>
+<tr>
+<td>rm -rf xxx *.log</td>
+<td># 删除当前目录下所有 “.log” 的文件（慎用）</td>
+</tr>
+<tr>
+<td>find fileName -name  *.txt \</td>
+<td>xargs rm -rf</td>
+<td># 将查找出来的文件全部删除（慎用）</td>
+</tr>
+<tr>
+<td>cp file dir/file</td>
+<td># 将文件拷贝到另一文件中</td>
+</tr>
+<tr>
+<td>cp -R dir1 dir2</td>
+<td># 拷贝多个目录 (含子目录) 到指定目录</td>
+</tr>
+<tr>
+<td>mv dir1 dir2</td>
+<td># 将文件或目录重新命名,或者将文件从一个目录移到另一个目录中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件查看、处理"><a href="#文件查看、处理" class="headerlink" title="文件查看、处理"></a>文件查看、处理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cat file</td>
+<td># 显示文件的内容</td>
+</tr>
+<tr>
+<td>cat -n file</td>
+<td># 显示文件的行数编号</td>
+</tr>
+<tr>
+<td>cat file1 file2 &gt; file3</td>
+<td># 将文件 file1 和 file2 的内容合并之后放入 新文件 file3 中</td>
+</tr>
+<tr>
+<td>head file</td>
+<td># 显示文件的头 10 行内容</td>
+</tr>
+<tr>
+<td>tail file</td>
+<td># 显示文件的最后 10 行内容</td>
+</tr>
+<tr>
+<td>tail -f file</td>
+<td># 显示文件最新追加的内容,并监视文件的变化,常用来跟踪日志文件</td>
+</tr>
+<tr>
+<td>more file</td>
+<td># 基于vi编辑器文本过滤器,它以全屏幕的方式按页显示文本文件的内容</td>
+</tr>
+<tr>
+<td>less file</td>
+<td># 作用与 more 十分类似, pageUp 向上翻页, pageDown 向下翻页, 按 q 退出</td>
+</tr>
+<tr>
+<td>cat file1 &gt; file2</td>
+<td># 覆盖导入</td>
+</tr>
+<tr>
+<td>cat file1 &gt;&gt; file</td>
+<td># 追加导入</td>
+</tr>
+<tr>
+<td>wc -l [-m][-c][-w] file</td>
+<td># 统计行数、字符数、字节数、单词数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件查看、处理-1"><a href="#文件查看、处理-1" class="headerlink" title="文件查看、处理"></a>文件查看、处理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grep keyWord</td>
+<td># 与 cat 或者其他命令搭配使用 cat file \</td>
+<td>grep keyWord</td>
+</tr>
+<tr>
+<td>find dir -name “*.log”</td>
+<td># 搜索指定目录下的后缀为 .log 的文件</td>
+</tr>
+<tr>
+<td>find dir -name “<em>.log” -o -name “</em>.pid”</td>
+<td># 搜索指定目录下的 “.log” 文件和 “.pid” 文件</td>
+</tr>
+<tr>
+<td>find dir -user user1</td>
+<td># 搜索指定目录下属于 user1 用户的文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文本编辑-vi-vim-底行模式下"><a href="#文本编辑-vi-vim-底行模式下" class="headerlink" title="文本编辑 vi / vim 底行模式下"></a>文本编辑 vi / vim 底行模式下</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:set nu</td>
+<td># 显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td># 不显示行号</td>
+</tr>
+<tr>
+<td>:n</td>
+<td># 跳转到指定第 n 行</td>
+</tr>
+<tr>
+<td>:w file</td>
+<td># 另存为</td>
+</tr>
+<tr>
+<td>:n1,n2 s/str1/str2/g</td>
+<td># 从 n1 行到 n2 行, 将 str1 替换为 str2（从开头到结束 1,$ s/str1/str2/g）</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td># 保存并退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td># 强制退出不保存</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文本编辑-vi-vim-命令模式下"><a href="#文本编辑-vi-vim-命令模式下" class="headerlink" title="文本编辑 vi / vim 命令模式下"></a>文本编辑 vi / vim 命令模式下</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G</td>
+<td># 到末行（Shift + g）</td>
+</tr>
+<tr>
+<td>gg</td>
+<td># 到首行</td>
+</tr>
+<tr>
+<td>dd</td>
+<td># 删除行或剪切行</td>
+</tr>
+<tr>
+<td>u</td>
+<td># 撤销</td>
+</tr>
+<tr>
+<td>y</td>
+<td># 在使用 v 模式选定了某一块的时候，复制选定块到缓冲区用</td>
+</tr>
+<tr>
+<td>yw</td>
+<td># 复制一个word （nyw或者ynw，复制n个word，n为数字）</td>
+</tr>
+<tr>
+<td>yy</td>
+<td># 复制一行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td># 向下复制 n 行</td>
+</tr>
+<tr>
+<td>p</td>
+<td># 粘贴</td>
+</tr>
+</tbody>
+</table>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chmod 755 dir/file</td>
+<td># 修改指定文件、文件夹的权限</td>
+</tr>
+<tr>
+<td>chmod -R 755 dir</td>
+<td># 递归修改目录及其子文件、目录的权限</td>
+</tr>
+<tr>
+<td>chown user file</td>
+<td># 改变文件的所有者</td>
+</tr>
+<tr>
+<td>chown -R user dir</td>
+<td># 改变目录的所有者</td>
+</tr>
+<tr>
+<td>chgrp group1 file</td>
+<td># 改变文件的所有者</td>
+</tr>
+<tr>
+<td>chgrp -R group1 dir</td>
+<td># 改变目录的所属组</td>
+</tr>
+<tr>
+<td>chown user1:group1 file</td>
+<td># 同时改变文件的所有者和所属组</td>
+</tr>
+<tr>
+<td>chown -R user1:group1 dir</td>
+<td># 同时改变目录的所有者和所属组</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td># 查看当前操作用户</td>
+</tr>
+<tr>
+<td>who</td>
+<td># 查看当前已登录系统的用户</td>
+</tr>
+<tr>
+<td>id user1</td>
+<td># 查看用户 user1 的归属 id 信息</td>
+</tr>
+</tbody>
+</table>
+<h3 id="压缩、解压"><a href="#压缩、解压" class="headerlink" title="压缩、解压"></a>压缩、解压</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tar -cvf test.tar test.log</td>
+<td># 仅打包,不压缩</td>
+</tr>
+<tr>
+<td>tar -xvf test.tar</td>
+<td># 直接解包</td>
+</tr>
+<tr>
+<td>tar -zcvf test.tar.gz test.log</td>
+<td># 打包后,以 gzip 压缩</td>
+</tr>
+<tr>
+<td>tar -zcvf test.tar.gz *</td>
+<td># 将当前目录下所有文件压缩</td>
+</tr>
+<tr>
+<td>tar -zxvf test.tar.gz</td>
+<td># 直接解压</td>
+</tr>
+<tr>
+<td>tar -zxvf test.tar.gz -C dir</td>
+<td># 解压到新目录,只能是 dir 且已经存在</td>
+</tr>
+<tr>
+<td>zip test.zip *</td>
+<td># 将当前目录下所有文件压缩为 zip 包</td>
+</tr>
+<tr>
+<td>unzip test.zip</td>
+<td># 解压缩 zip 包</td>
+</tr>
+</tbody>
+</table>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>groupadd group1</td>
+<td># 创建用户组</td>
+</tr>
+<tr>
+<td>groupdel group1</td>
+<td># 删除用户组</td>
+</tr>
+<tr>
+<td>groupmod  -n group2 group1</td>
+<td># 将 group1 重命名 group2</td>
+</tr>
+<tr>
+<td>useradd user1</td>
+<td># 创建用户</td>
+</tr>
+<tr>
+<td>useradd -g group1 user1</td>
+<td># 创建 user1 并将其分配到 group1 组下</td>
+</tr>
+<tr>
+<td>userdel -r user1</td>
+<td># 删除 user1, “-r” 参数表示同时也删除 home 目录下的相关目录</td>
+</tr>
+<tr>
+<td>usermod -g group2 user1</td>
+<td># 改变 user1 的组为 group2</td>
+</tr>
+<tr>
+<td>usermod -G group2 user1</td>
+<td># 将 user1 的添加到 group2 组中来，同时保留原来的主组</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td># 修改当前用户密码</td>
+</tr>
+<tr>
+<td>passwd user1</td>
+<td># 修改 user1 用户的密码，仅限 root 用户执行</td>
+</tr>
+<tr>
+<td>su user1</td>
+<td># 切换到用户 user1</td>
+</tr>
+<tr>
+<td>groups user1</td>
+<td># 查看用户 user1 所属的组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="查看命令帮助"><a href="#查看命令帮助" class="headerlink" title="查看命令帮助"></a>查看命令帮助</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>help cd</td>
+<td># 用于内部命令, 如 exit、history、cd、echo 等常驻内存</td>
+</tr>
+<tr>
+<td>ls –help</td>
+<td># 主要用于外部命令,可通过 “echo $PATH” 命令查看外部命令的存储路径,如 ls,vi 等</td>
+</tr>
+<tr>
+<td>man ls</td>
+<td># 命令手册,可用于所有命令,输入”q”可退出</td>
+</tr>
+<tr>
+<td>type cd</td>
+<td># 查看命令类型,内部 or 外部及命令位置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="系统相关命令"><a href="#系统相关命令" class="headerlink" title="系统相关命令"></a>系统相关命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shutdown  -h now</td>
+<td># 立即关机</td>
+</tr>
+<tr>
+<td>shutdown  -r now</td>
+<td># 立即重启</td>
+</tr>
+<tr>
+<td>uname -r</td>
+<td># 查看内核版本</td>
+</tr>
+<tr>
+<td>cal</td>
+<td># 日历</td>
+</tr>
+<tr>
+<td>date</td>
+<td># 时间、日期</td>
+</tr>
+<tr>
+<td>date -s “2015-12-22 08:00”</td>
+<td># 修改时间</td>
+</tr>
+<tr>
+<td>ntpdate time.nist.gov</td>
+<td># 同步当前时间</td>
+</tr>
+<tr>
+<td>history</td>
+<td># 查看历史命令记录,运行时 “!”+ 命令号,如 !123 运行 编号为 123 的命令</td>
+</tr>
+<tr>
+<td>ps -ef</td>
+<td># 查看进程</td>
+</tr>
+<tr>
+<td>kill pid</td>
+<td># 终止进程</td>
+</tr>
+<tr>
+<td>kill -9 pid</td>
+<td># 强制终止进程</td>
+</tr>
+<tr>
+<td>top</td>
+<td># 查看当前系统资源使用率</td>
+</tr>
+<tr>
+<td>df -h</td>
+<td># 查看磁盘信息</td>
+</tr>
+<tr>
+<td>free -m</td>
+<td># 查看内存信息</td>
+</tr>
+<tr>
+<td>du -h file/dir</td>
+<td># 查看单个文件/目录大小 -h 表示以 K,M,G</td>
+</tr>
+<tr>
+<td>du -sh file/dir</td>
+<td># 查看文件/目录总大小</td>
+</tr>
+<tr>
+<td>mount -o loop linux.iso /mnt/dir</td>
+<td># 加载文件系统到指定的加载点</td>
+</tr>
+<tr>
+<td>umount /mnt/dir</td>
+<td># 卸载已经加载的文件系统</td>
+</tr>
+<tr>
+<td>rpm -ivh xxx.rpm</td>
+<td># 安装 rpm 包</td>
+</tr>
+<tr>
+<td>rpm -e xxx.rpm</td>
+<td># 卸载 rpm 包</td>
+</tr>
+<tr>
+<td>yum install xxx</td>
+<td># 安装安装包xxx</td>
+</tr>
+<tr>
+<td>yum remove xxx</td>
+<td># 删除已安装的xxx</td>
+</tr>
+<tr>
+<td>wget <a href="http://xxxx" target="_blank" rel="noopener">http://xxxx</a></td>
+<td># 下载远端 zip 包</td>
+</tr>
+<tr>
+<td>echo ‘’ &gt; xxx</td>
+<td># 清空xxx文件内容</td>
+</tr>
+<tr>
+<td>netstat -an \</td>
+<td>grep 80</td>
+<td># 80端口是否被监听</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/php/google/php/google/google-fcm推送/" rel="prev" title="google-fcm实现推送">
+                google-fcm实现推送 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件、目录类"><span class="nav-number">1.</span> <span class="nav-text">文件、目录类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件查看、处理"><span class="nav-number">2.</span> <span class="nav-text">文件查看、处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件查看、处理-1"><span class="nav-number">3.</span> <span class="nav-text">文件查看、处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本编辑-vi-vim-底行模式下"><span class="nav-number">4.</span> <span class="nav-text">文本编辑 vi / vim 底行模式下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本编辑-vi-vim-命令模式下"><span class="nav-number">5.</span> <span class="nav-text">文本编辑 vi / vim 命令模式下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理"><span class="nav-number">6.</span> <span class="nav-text">权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩、解压"><span class="nav-number">7.</span> <span class="nav-text">压缩、解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户管理"><span class="nav-number">8.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看命令帮助"><span class="nav-number">9.</span> <span class="nav-text">查看命令帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统相关命令"><span class="nav-number">10.</span> <span class="nav-text">系统相关命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/linux/linux/linux常用命令/';
+          this.page.identifier = 'linux/linux/linux常用命令/';
+          this.page.title = 'linux常用命令';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

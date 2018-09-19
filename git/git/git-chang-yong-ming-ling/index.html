@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整理了下git常用的命令">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="http://oryxtc.win/git/git/git-chang-yong-ming-ling/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="整理了下git常用的命令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-19T08:17:41.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git常用命令">
+<meta name="twitter:description" content="整理了下git常用的命令">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/git/git/git-chang-yong-ming-ling/"/>
+
+
+
+
+
+  <title>git常用命令 | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/git/git/git-chang-yong-ming-ling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">git常用命令</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T16:37:00+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/git/git/git-chang-yong-ming-ling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="git/git/git-chang-yong-ming-ling/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  整理了下git常用的命令
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h1><h2 id="获取Git的升级"><a href="#获取Git的升级" class="headerlink" title="获取Git的升级"></a>获取Git的升级</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git://git.kernel.org/pub/scm/git/git.git</span><br></pre></td></tr></table></figure>
+<h2 id="列出所有能找到的配置"><a href="#列出所有能找到的配置" class="headerlink" title="列出所有能找到的配置"></a>列出所有能找到的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+<h2 id="检查某一项配置"><a href="#检查某一项配置" class="headerlink" title="检查某一项配置"></a>检查某一项配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config &lt;key&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="获取Git命令的使用手册"><a href="#获取Git命令的使用手册" class="headerlink" title="获取Git命令的使用手册"></a>获取Git命令的使用手册</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git help &lt;verb&gt;</span><br><span class="line">git &lt;verb&gt; --help</span><br><span class="line">man git-&lt;verb&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="在现有目录中初始化仓库"><a href="#在现有目录中初始化仓库" class="headerlink" title="在现有目录中初始化仓库"></a>在现有目录中初始化仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="克隆现有的仓库"><a href="#克隆现有的仓库" class="headerlink" title="克隆现有的仓库"></a>克隆现有的仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [url] [mylibrary]</span><br></pre></td></tr></table></figure>
+<h2 id="检查当前文件状态"><a href="#检查当前文件状态" class="headerlink" title="检查当前文件状态"></a>检查当前文件状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<h2 id="添加内容到下一次提交中"><a href="#添加内容到下一次提交中" class="headerlink" title="添加内容到下一次提交中"></a>添加内容到下一次提交中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="查看尚未暂存的文件更新了哪些部分"><a href="#查看尚未暂存的文件更新了哪些部分" class="headerlink" title="查看尚未暂存的文件更新了哪些部分"></a>查看尚未暂存的文件更新了哪些部分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+<h2 id="查看已暂存的将要添加到下次提交里的内容"><a href="#查看已暂存的将要添加到下次提交里的内容" class="headerlink" title="查看已暂存的将要添加到下次提交里的内容"></a>查看已暂存的将要添加到下次提交里的内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
+<h2 id="提交更新"><a href="#提交更新" class="headerlink" title="提交更新"></a>提交更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &lt;&quot;msg&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="跳过使用暂存区域"><a href="#跳过使用暂存区域" class="headerlink" title="跳过使用暂存区域"></a>跳过使用暂存区域</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -a -m [msg]</span><br></pre></td></tr></table></figure>
+<h2 id="移除文件"><a href="#移除文件" class="headerlink" title="移除文件"></a>移除文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm</span><br></pre></td></tr></table></figure>
+<h2 id="强制移除已放到暂存区域的文件"><a href="#强制移除已放到暂存区域的文件" class="headerlink" title="强制移除已放到暂存区域的文件"></a>强制移除已放到暂存区域的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm -f</span><br></pre></td></tr></table></figure>
+<h2 id="想让文件保留在磁盘，但是并不想让-Git-继续跟踪"><a href="#想让文件保留在磁盘，但是并不想让-Git-继续跟踪" class="headerlink" title="想让文件保留在磁盘，但是并不想让 Git 继续跟踪"></a>想让文件保留在磁盘，但是并不想让 Git 继续跟踪</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="移动文件-重命名文件"><a href="#移动文件-重命名文件" class="headerlink" title="移动文件(重命名文件)"></a>移动文件(重命名文件)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv</span><br></pre></td></tr></table></figure>
+<h2 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log [-p] [-num] [--stat]</span><br></pre></td></tr></table></figure>
+<h2 id="重新提交"><a href="#重新提交" class="headerlink" title="重新提交"></a>重新提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<h2 id="取消暂存文件"><a href="#取消暂存文件" class="headerlink" title="取消暂存文件"></a>取消暂存文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="撤消对文件的修改"><a href="#撤消对文件的修改" class="headerlink" title="撤消对文件的修改"></a>撤消对文件的修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="远程仓库使用的简写与其对应的URL"><a href="#远程仓库使用的简写与其对应的URL" class="headerlink" title="远程仓库使用的简写与其对应的URL"></a>远程仓库使用的简写与其对应的URL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;shortname&gt; &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="从远程仓库中抓取与拉取"><a href="#从远程仓库中抓取与拉取" class="headerlink" title="从远程仓库中抓取与拉取"></a>从远程仓库中抓取与拉取</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch [remote-name]</span><br></pre></td></tr></table></figure>
+<h2 id="从远程仓库分支拉取到本地-会在本地新建分支，自动切换到该本地分支-并本地分支会和远程分支建立映射关系"><a href="#从远程仓库分支拉取到本地-会在本地新建分支，自动切换到该本地分支-并本地分支会和远程分支建立映射关系" class="headerlink" title="从远程仓库分支拉取到本地(会在本地新建分支，自动切换到该本地分支,并本地分支会和远程分支建立映射关系)"></a>从远程仓库分支拉取到本地(会在本地新建分支，自动切换到该本地分支,并本地分支会和远程分支建立映射关系)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b [branch-name] [remote-name]/[branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="从远程仓库分支拉取到本地-会在本地新建分支，但是不会自动切换到该本地分支-并本地分支不会和远程分支建立映射关系"><a href="#从远程仓库分支拉取到本地-会在本地新建分支，但是不会自动切换到该本地分支-并本地分支不会和远程分支建立映射关系" class="headerlink" title="从远程仓库分支拉取到本地(会在本地新建分支，但是不会自动切换到该本地分支,并本地分支不会和远程分支建立映射关系)"></a>从远程仓库分支拉取到本地(会在本地新建分支，但是不会自动切换到该本地分支,并本地分支不会和远程分支建立映射关系)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch [remote-name] [branch-name]:[branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="当前分支与远程仓库分支建立映射关系"><a href="#当前分支与远程仓库分支建立映射关系" class="headerlink" title="当前分支与远程仓库分支建立映射关系"></a>当前分支与远程仓库分支建立映射关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to [remote-name]/[branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="指定分支与远程仓库分支建立映射关系"><a href="#指定分支与远程仓库分支建立映射关系" class="headerlink" title="指定分支与远程仓库分支建立映射关系"></a>指定分支与远程仓库分支建立映射关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream [branch-name] [remote-name]/[branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote show [remote-name]</span><br></pre></td></tr></table></figure>
+<h2 id="远程仓库重命名"><a href="#远程仓库重命名" class="headerlink" title="远程仓库重命名"></a>远程仓库重命名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename [remote-name] [new-remote-name]</span><br></pre></td></tr></table></figure>
+<h2 id="远程仓库删除"><a href="#远程仓库删除" class="headerlink" title="远程仓库删除"></a>远程仓库删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm [remote-name]</span><br></pre></td></tr></table></figure>
+<h2 id="列出标签"><a href="#列出标签" class="headerlink" title="列出标签"></a>列出标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<h2 id="创建附注标签"><a href="#创建附注标签" class="headerlink" title="创建附注标签"></a>创建附注标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a [tagname] -m [msg]</span><br></pre></td></tr></table></figure>
+<h2 id="创建轻量标签"><a href="#创建轻量标签" class="headerlink" title="创建轻量标签"></a>创建轻量标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag [tagname]</span><br></pre></td></tr></table></figure>
+<h2 id="后期打标签"><a href="#后期打标签" class="headerlink" title="后期打标签"></a>后期打标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a [tagname] &lt;key&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="检出标签"><a href="#检出标签" class="headerlink" title="检出标签"></a>检出标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b [branchname] [tagname]</span><br></pre></td></tr></table></figure>
+<h2 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global [alias.alias-name] [command]</span><br></pre></td></tr></table></figure>
+<h2 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch [branc-name]</span><br></pre></td></tr></table></figure>
+<h2 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout [branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d [branch-name]</span><br></pre></td></tr></table></figure>
+<h2 id="列出所有分支"><a href="#列出所有分支" class="headerlink" title="列出所有分支"></a>列出所有分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<h2 id="推送分支至远程"><a href="#推送分支至远程" class="headerlink" title="推送分支至远程"></a>推送分支至远程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push (remote) (branch)</span><br></pre></td></tr></table></figure>
+<h2 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push (remote) --delete (branch)</span><br></pre></td></tr></table></figure>
+<h2 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase [basebranch]</span><br></pre></td></tr></table></figure>
+<h2 id="将指定分支变基到目标分支"><a href="#将指定分支变基到目标分支" class="headerlink" title="将指定分支变基到目标分支"></a>将指定分支变基到目标分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase [basebranch] [topicbranch]</span><br></pre></td></tr></table></figure>
+<h2 id="取出-client-分支，找出处于-client-分支和-server-分支的共同祖先之后的修改，然后把它们在-master-分支上重放一遍"><a href="#取出-client-分支，找出处于-client-分支和-server-分支的共同祖先之后的修改，然后把它们在-master-分支上重放一遍" class="headerlink" title="取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍"></a>取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --onto master server client</span><br></pre></td></tr></table></figure>
+<h2 id="用变基解决变基"><a href="#用变基解决变基" class="headerlink" title="用变基解决变基"></a>用变基解决变基</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase</span><br></pre></td></tr></table></figure>
+<h2 id="把现有仓库导出为裸仓库"><a href="#把现有仓库导出为裸仓库" class="headerlink" title="把现有仓库导出为裸仓库"></a>把现有仓库导出为裸仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --bare [library-name] [newlibrary-name]</span><br></pre></td></tr></table></figure>
+<h2 id="复制你的裸仓库来创建一个新仓库"><a href="#复制你的裸仓库来创建一个新仓库" class="headerlink" title="复制你的裸仓库来创建一个新仓库"></a>复制你的裸仓库来创建一个新仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r my_project.git user@git.example.com:/opt/git</span><br></pre></td></tr></table></figure>
+<h2 id="强制提交"><a href="#强制提交" class="headerlink" title="强制提交"></a>强制提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [remote-name] [branch-name] --force</span><br></pre></td></tr></table></figure>
+<h2 id="丢弃当前全部暂存"><a href="#丢弃当前全部暂存" class="headerlink" title="丢弃当前全部暂存"></a>丢弃当前全部暂存</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure>
+<h2 id="查看当前版本号"><a href="#查看当前版本号" class="headerlink" title="查看当前版本号"></a>查看当前版本号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rev-parse HEAD</span><br></pre></td></tr></table></figure>
+<h2 id="全局提交用户名与邮箱"><a href="#全局提交用户名与邮箱" class="headerlink" title="全局提交用户名与邮箱"></a>全局提交用户名与邮箱</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Yuchen Deng&quot;</span><br><span class="line">git config --global user.email 邮箱名@gmail.com</span><br></pre></td></tr></table></figure>
+<h2 id="中文编码支持"><a href="#中文编码支持" class="headerlink" title="中文编码支持"></a>中文编码支持</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global gui.encoding utf-8</span><br><span class="line">git config --global i18n.commitencoding utf-8</span><br><span class="line">git config --global i18n.logoutputencoding utf-8</span><br></pre></td></tr></table></figure>
+<h2 id="全局编辑器，提交时将COMMIT-EDITMSG编码转换成UTF-8可避免乱码"><a href="#全局编辑器，提交时将COMMIT-EDITMSG编码转换成UTF-8可避免乱码" class="headerlink" title="全局编辑器，提交时将COMMIT_EDITMSG编码转换成UTF-8可避免乱码"></a>全局编辑器，提交时将COMMIT_EDITMSG编码转换成UTF-8可避免乱码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor notepad2</span><br></pre></td></tr></table></figure>
+<h2 id="差异工具配置"><a href="#差异工具配置" class="headerlink" title="差异工具配置"></a>差异工具配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global diff.external git-diff-wrapper.sh</span><br><span class="line">git config --global diff.tool tortoise</span><br><span class="line">git config --global difftool.tortoise.cmd &apos;TortoiseMerge -base:&quot;$LOCAL&quot; -theirs:&quot;$REMOTE&quot;&apos;</span><br><span class="line">git config --global difftool.prompt false</span><br></pre></td></tr></table></figure>
+<h2 id="合并工具配置"><a href="#合并工具配置" class="headerlink" title="合并工具配置"></a>合并工具配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global merge.tool tortoise</span><br><span class="line">git config --global mergetool.tortoise.cmd &apos;TortoiseMerge -base:&quot;$BASE&quot; -theirs:&quot;$REMOTE&quot; -mine:&quot;$LOCAL&quot; -merged:&quot;$MERGED&quot;&apos;</span><br><span class="line">git config --global mergetool.prompt false</span><br></pre></td></tr></table></figure>
+<h2 id="别名设置"><a href="#别名设置" class="headerlink" title="别名设置"></a>别名设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.dt difftool</span><br><span class="line">git config --global alias.mt mergetool</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/docker/docker/dockerfile-chuang-jian-jing-xiang/" rel="next" title="dockerfile创建镜像">
+                <i class="fa fa-chevron-left"></i> dockerfile创建镜像
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/other/other/ubuntu-16.04-an-zhuang-ss-+-bbr/" rel="prev" title="ubuntu 16.04 安装SS + BBR">
+                ubuntu 16.04 安装SS + BBR <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git常用命令"><span class="nav-number">1.</span> <span class="nav-text">git常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取Git的升级"><span class="nav-number">1.1.</span> <span class="nav-text">获取Git的升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出所有能找到的配置"><span class="nav-number">1.2.</span> <span class="nav-text">列出所有能找到的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查某一项配置"><span class="nav-number">1.3.</span> <span class="nav-text">检查某一项配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取Git命令的使用手册"><span class="nav-number">1.4.</span> <span class="nav-text">获取Git命令的使用手册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在现有目录中初始化仓库"><span class="nav-number">1.5.</span> <span class="nav-text">在现有目录中初始化仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆现有的仓库"><span class="nav-number">1.6.</span> <span class="nav-text">克隆现有的仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查当前文件状态"><span class="nav-number">1.7.</span> <span class="nav-text">检查当前文件状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加内容到下一次提交中"><span class="nav-number">1.8.</span> <span class="nav-text">添加内容到下一次提交中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看尚未暂存的文件更新了哪些部分"><span class="nav-number">1.9.</span> <span class="nav-text">查看尚未暂存的文件更新了哪些部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看已暂存的将要添加到下次提交里的内容"><span class="nav-number">1.10.</span> <span class="nav-text">查看已暂存的将要添加到下次提交里的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交更新"><span class="nav-number">1.11.</span> <span class="nav-text">提交更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跳过使用暂存区域"><span class="nav-number">1.12.</span> <span class="nav-text">跳过使用暂存区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移除文件"><span class="nav-number">1.13.</span> <span class="nav-text">移除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制移除已放到暂存区域的文件"><span class="nav-number">1.14.</span> <span class="nav-text">强制移除已放到暂存区域的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想让文件保留在磁盘，但是并不想让-Git-继续跟踪"><span class="nav-number">1.15.</span> <span class="nav-text">想让文件保留在磁盘，但是并不想让 Git 继续跟踪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动文件-重命名文件"><span class="nav-number">1.16.</span> <span class="nav-text">移动文件(重命名文件)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看提交历史"><span class="nav-number">1.17.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交"><span class="nav-number">1.18.</span> <span class="nav-text">重新提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消暂存文件"><span class="nav-number">1.19.</span> <span class="nav-text">取消暂存文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消对文件的修改"><span class="nav-number">1.20.</span> <span class="nav-text">撤消对文件的修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库使用的简写与其对应的URL"><span class="nav-number">1.21.</span> <span class="nav-text">远程仓库使用的简写与其对应的URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加远程仓库"><span class="nav-number">1.22.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从远程仓库中抓取与拉取"><span class="nav-number">1.23.</span> <span class="nav-text">从远程仓库中抓取与拉取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从远程仓库分支拉取到本地-会在本地新建分支，自动切换到该本地分支-并本地分支会和远程分支建立映射关系"><span class="nav-number">1.24.</span> <span class="nav-text">从远程仓库分支拉取到本地(会在本地新建分支，自动切换到该本地分支,并本地分支会和远程分支建立映射关系)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从远程仓库分支拉取到本地-会在本地新建分支，但是不会自动切换到该本地分支-并本地分支不会和远程分支建立映射关系"><span class="nav-number">1.25.</span> <span class="nav-text">从远程仓库分支拉取到本地(会在本地新建分支，但是不会自动切换到该本地分支,并本地分支不会和远程分支建立映射关系)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当前分支与远程仓库分支建立映射关系"><span class="nav-number">1.26.</span> <span class="nav-text">当前分支与远程仓库分支建立映射关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定分支与远程仓库分支建立映射关系"><span class="nav-number">1.27.</span> <span class="nav-text">指定分支与远程仓库分支建立映射关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看远程仓库"><span class="nav-number">1.28.</span> <span class="nav-text">查看远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库重命名"><span class="nav-number">1.29.</span> <span class="nav-text">远程仓库重命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库删除"><span class="nav-number">1.30.</span> <span class="nav-text">远程仓库删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出标签"><span class="nav-number">1.31.</span> <span class="nav-text">列出标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建附注标签"><span class="nav-number">1.32.</span> <span class="nav-text">创建附注标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建轻量标签"><span class="nav-number">1.33.</span> <span class="nav-text">创建轻量标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后期打标签"><span class="nav-number">1.34.</span> <span class="nav-text">后期打标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检出标签"><span class="nav-number">1.35.</span> <span class="nav-text">检出标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建别名"><span class="nav-number">1.36.</span> <span class="nav-text">创建别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支创建"><span class="nav-number">1.37.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支切换"><span class="nav-number">1.38.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除本地分支"><span class="nav-number">1.39.</span> <span class="nav-text">删除本地分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出所有分支"><span class="nav-number">1.40.</span> <span class="nav-text">列出所有分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送分支至远程"><span class="nav-number">1.41.</span> <span class="nav-text">推送分支至远程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除远程分支"><span class="nav-number">1.42.</span> <span class="nav-text">删除远程分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变基"><span class="nav-number">1.43.</span> <span class="nav-text">变基</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将指定分支变基到目标分支"><span class="nav-number">1.44.</span> <span class="nav-text">将指定分支变基到目标分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取出-client-分支，找出处于-client-分支和-server-分支的共同祖先之后的修改，然后把它们在-master-分支上重放一遍"><span class="nav-number">1.45.</span> <span class="nav-text">取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用变基解决变基"><span class="nav-number">1.46.</span> <span class="nav-text">用变基解决变基</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把现有仓库导出为裸仓库"><span class="nav-number">1.47.</span> <span class="nav-text">把现有仓库导出为裸仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制你的裸仓库来创建一个新仓库"><span class="nav-number">1.48.</span> <span class="nav-text">复制你的裸仓库来创建一个新仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制提交"><span class="nav-number">1.49.</span> <span class="nav-text">强制提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#丢弃当前全部暂存"><span class="nav-number">1.50.</span> <span class="nav-text">丢弃当前全部暂存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看当前版本号"><span class="nav-number">1.51.</span> <span class="nav-text">查看当前版本号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局提交用户名与邮箱"><span class="nav-number">1.52.</span> <span class="nav-text">全局提交用户名与邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文编码支持"><span class="nav-number">1.53.</span> <span class="nav-text">中文编码支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局编辑器，提交时将COMMIT-EDITMSG编码转换成UTF-8可避免乱码"><span class="nav-number">1.54.</span> <span class="nav-text">全局编辑器，提交时将COMMIT_EDITMSG编码转换成UTF-8可避免乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异工具配置"><span class="nav-number">1.55.</span> <span class="nav-text">差异工具配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并工具配置"><span class="nav-number">1.56.</span> <span class="nav-text">合并工具配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名设置"><span class="nav-number">1.57.</span> <span class="nav-text">别名设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/git/git/git-chang-yong-ming-ling/';
+          this.page.identifier = 'git/git/git-chang-yong-ming-ling/';
+          this.page.title = 'git常用命令';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

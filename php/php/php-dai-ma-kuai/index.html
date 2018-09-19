@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://ooqj15229.bkt.clouddn.com/jquery.fancybox-3.0.0.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="http://ooqj15229.bkt.clouddn.com/font-awesome-4.6.2.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/head-portrait.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/head-portrait.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="php," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="货号单 0000001的生成方法&amp;通过goole Api以经纬度获取城市名...">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php代码块">
+<meta property="og:url" content="http://oryxtc.win/php/php/php-dai-ma-kuai/index.html">
+<meta property="og:site_name" content="oryxtc&#39;s blog">
+<meta property="og:description" content="货号单 0000001的生成方法&amp;通过goole Api以经纬度获取城市名...">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-27T03:26:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php代码块">
+<meta name="twitter:description" content="货号单 0000001的生成方法&amp;通过goole Api以经纬度获取城市名...">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TFPY979B10',
+      apiKey: 'a62253ee25b618055d817513e98d2e30',
+      indexName: 'prod_myblog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"没有在结果中找到: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oryxtc.win/php/php/php-dai-ma-kuai/"/>
+
+
+
+
+
+  <title>php代码块 | oryxtc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">oryxtc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oryxtc.win/php/php/php-dai-ma-kuai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="oryxtc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oryxtc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">php代码块</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T11:26:00+08:00">
+                2017-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/php/php/php-dai-ma-kuai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="php/php/php-dai-ma-kuai/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  货号单 0000001的生成方法&通过goole Api以经纬度获取城市名...
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="php代码块"><a href="#php代码块" class="headerlink" title="php代码块"></a>php代码块</h1><h2 id="货号单-0000001的生成方法"><a href="#货号单-0000001的生成方法" class="headerlink" title="货号单 0000001的生成方法"></a>货号单 0000001的生成方法</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_get_sn</span><span class="params">($sn)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($sn) &#123;</span><br><span class="line">        <span class="keyword">return</span> $sn;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (($numT = M(<span class="string">'GoodsNumber'</span>)-&gt;getFieldByDate(date(<span class="string">'Ymd'</span>), <span class="string">'count'</span>)) === <span class="keyword">null</span>) &#123;</span><br><span class="line">        $res = M(<span class="string">'GoodsNumber'</span>)-&gt;add(<span class="keyword">array</span>(<span class="string">'date'</span> =&gt; date(<span class="string">'Ymd'</span>), <span class="string">'count'</span> =&gt; str_pad(<span class="number">1</span>, <span class="number">6</span>, <span class="number">0</span>, STR_PAD_LEFT)));</span><br><span class="line">        $num = str_pad(<span class="number">1</span>, <span class="number">6</span>, <span class="number">0</span>, STR_PAD_LEFT);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        M(<span class="string">'GoodsNumber'</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">'date'</span> =&gt; date(<span class="string">'Ymd'</span>)))-&gt;setInc(<span class="string">'count'</span>);</span><br><span class="line">        $num = str_pad($numT + <span class="number">1</span>, <span class="number">6</span>, <span class="number">0</span>, STR_PAD_LEFT);</span><br><span class="line">    &#125;</span><br><span class="line">    $sn = <span class="string">'sn'</span> . date(<span class="string">'Ymd'</span>) . $num;</span><br><span class="line">    <span class="keyword">return</span> $sn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="通过goole-Api以经纬度获取城市名"><a href="#通过goole-Api以经纬度获取城市名" class="headerlink" title="通过goole Api以经纬度获取城市名"></a>通过goole Api以经纬度获取城市名</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">curlGet</span><span class="params">( $latlng )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $url = <span class="string">"http://maps.google.com/maps/api/geocode/json?latlng=&#123;$latlng&#125;&amp;sensor=false"</span>;</span><br><span class="line">    $ch = curl_init();</span><br><span class="line">    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="keyword">FALSE</span>); <span class="comment">//跳过证书检查</span></span><br><span class="line">    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="keyword">FALSE</span>); <span class="comment">//从证书中检查SSL加密算法是否存在</span></span><br><span class="line">    curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">    curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">    curl_setopt($ch, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    $output = curl_exec($ch);</span><br><span class="line">    curl_close($ch);</span><br><span class="line">    <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="生成uuid方法"><a href="#生成uuid方法" class="headerlink" title="生成uuid方法"></a>生成uuid方法</h2><ul>
+<li><p>使用PHP内置函数实现</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uniqid(prefix,more_entropy)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用自定义方法实现</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUuid</span><span class="params">()</span></span>&#123; </span><br><span class="line">    <span class="keyword">return</span> sprintf(<span class="string">'%04x%04x%04x-%04x%04x-%04x%04x%04x'</span>, </span><br><span class="line">        <span class="comment">// 32 bits for "time_low" </span></span><br><span class="line">        mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>), mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>), </span><br><span class="line">        <span class="comment">// 16 bits for "time_mid" </span></span><br><span class="line">        mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>), </span><br><span class="line">        <span class="comment">// 16 bits for "time_hi_and_version", </span></span><br><span class="line">        <span class="comment">// four most significant bits holds version number 4 </span></span><br><span class="line">        mt_rand(<span class="number">0</span>, <span class="number">0x0fff</span>) | <span class="number">0x4000</span>, </span><br><span class="line">        <span class="comment">// 16 bits, 8 bits for "clk_seq_hi_res", </span></span><br><span class="line">        <span class="comment">// 8 bits for "clk_seq_low", </span></span><br><span class="line">        <span class="comment">// two most significant bits holds zero and one for variant DCE1.1 </span></span><br><span class="line">        mt_rand(<span class="number">0</span>, <span class="number">0x3fff</span>) | <span class="number">0x8000</span>, </span><br><span class="line">        <span class="comment">// 48 bits for "node" </span></span><br><span class="line">        mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>), mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>), mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>) </span><br><span class="line">    ); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="验证身份证函数"><a href="#验证身份证函数" class="headerlink" title="验证身份证函数"></a>验证身份证函数</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">puhlic <span class="function"><span class="keyword">function</span> <span class="title">validateIdCard</span><span class="params">($value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/^\d&#123;17&#125;[0-9xX]$/'</span>, $value)) &#123; <span class="comment">//基本格式校验</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $parsed = date_parse(substr($value, <span class="number">6</span>, <span class="number">8</span>));</span><br><span class="line">    <span class="keyword">if</span> (!(<span class="keyword">isset</span>($parsed[<span class="string">'warning_count'</span>]) </span><br><span class="line">        &amp;&amp; $parsed[<span class="string">'warning_count'</span>] == <span class="number">0</span>)) &#123; <span class="comment">//年月日位校验</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $base = substr($value, <span class="number">0</span>, <span class="number">17</span>);</span><br><span class="line">    $factor = [<span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>];</span><br><span class="line">    $tokens = [<span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'X'</span>, <span class="string">'9'</span>, <span class="string">'8'</span>, <span class="string">'7'</span>, <span class="string">'6'</span>, <span class="string">'5'</span>, <span class="string">'4'</span>, <span class="string">'3'</span>, <span class="string">'2'</span>];</span><br><span class="line">    $checkSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ($i=<span class="number">0</span>; $i&lt;<span class="number">17</span>; $i++) &#123;</span><br><span class="line">        $checkSum += intval(substr($base, $i, <span class="number">1</span>)) * $factor[$i];</span><br><span class="line">    &#125;</span><br><span class="line">    $mod = $checkSum % <span class="number">11</span>;</span><br><span class="line">    $token = $tokens[$mod];</span><br><span class="line">    $lastChar = strtoupper(substr($value, <span class="number">17</span>, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> ($lastChar === $token); <span class="comment">//最后一位校验位校验</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="加密解密函数"><a href="#加密解密函数" class="headerlink" title="加密解密函数"></a>加密解密函数</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$str = <span class="string">'111021'</span>;</span><br><span class="line">$key = <span class="string">'APPYJJ-PHONE-LAZY'</span>;</span><br><span class="line"><span class="comment">//加密函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">encode</span><span class="params">($str,$key)</span></span>&#123;</span><br><span class="line">    $res = base64_encode($str);</span><br><span class="line">    $code = $res^$key;</span><br><span class="line">    <span class="keyword">return</span> $code;</span><br><span class="line">&#125;</span><br><span class="line">$str = encode($str,$key);</span><br><span class="line">print_r($str);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr&gt;"</span>;</span><br><span class="line"><span class="comment">//解密函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decode</span><span class="params">($str,$key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> base64_decode($str^$key);</span><br><span class="line">&#125;</span><br><span class="line">print_r(decode($str,$key));</span><br></pre></td></tr></table></figure>
+<h2 id="菜单栏数据引用赋值实现"><a href="#菜单栏数据引用赋值实现" class="headerlink" title="菜单栏数据引用赋值实现"></a>菜单栏数据引用赋值实现</h2><p><strong>方式1:</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 格式化菜单数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $menuData</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMenuTree</span><span class="params">($menuData)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($menuData <span class="keyword">as</span> $item)</span><br><span class="line">        $menuData[$item[<span class="string">'parent_id'</span>]][<span class="string">'son'</span>][$item[<span class="string">'id'</span>]] = &amp;$menuData[$item[<span class="string">'id'</span>]];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">isset</span>($menuData[<span class="number">0</span>][<span class="string">'son'</span>]) ? $menuData[<span class="number">0</span>][<span class="string">'son'</span>] : [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>方式2</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 格式化菜单数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $menuData</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMenuTree</span><span class="params">($menuData)</span> </span>&#123;</span><br><span class="line">    $tree = []; <span class="comment">//格式化好的树</span></span><br><span class="line">    <span class="keyword">foreach</span> ($menuData <span class="keyword">as</span> $item)</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($menuData[$item[<span class="string">'parent_id'</span>]]))</span><br><span class="line">            $menuData[$item[<span class="string">'parent_id'</span>]][<span class="string">'son'</span>][] = &amp;$menuData[$item[<span class="string">'id'</span>]];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            $tree[] = &amp;$menuData[$item[<span class="string">'id'</span>]];</span><br><span class="line">    <span class="keyword">return</span> $tree;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="菜单栏数据递归实现"><a href="#菜单栏数据递归实现" class="headerlink" title="菜单栏数据递归实现"></a>菜单栏数据递归实现</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 格式化菜单数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $menus_data</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> int $parent_id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatMenu</span><span class="params">($menus_data, $parent_id = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $return_data = [];</span><br><span class="line">    <span class="keyword">foreach</span> ($menus_data <span class="keyword">as</span> $menus_datum) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($menus_datum[<span class="string">'parent_id'</span>] === $parent_id) &#123;</span><br><span class="line">            $menus_datum[<span class="string">'child'</span>] = <span class="keyword">$this</span>-&gt;formatMenu($menus_data, $menus_datum[<span class="string">'id'</span>]);</span><br><span class="line">            $return_data[]        = $menus_datum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $return_data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自动捕获Fatal-Error"><a href="#自动捕获Fatal-Error" class="headerlink" title="自动捕获Fatal Error"></a>自动捕获Fatal Error</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">register_shutdown_function( <span class="string">"fatal_handler"</span> );</span><br><span class="line">set_error_handler(<span class="string">"error_handler"</span>);</span><br><span class="line"></span><br><span class="line">define(<span class="string">'E_FATAL'</span>,  E_ERROR | E_USER_ERROR |  E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR| E_PARSE );</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取fatal error</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fatal_handler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $error = error_get_last();</span><br><span class="line">    <span class="keyword">if</span>($error &amp;&amp; ($error[<span class="string">"type"</span>]===($error[<span class="string">"type"</span>] &amp; E_FATAL))) &#123;</span><br><span class="line">        $errno   = $error[<span class="string">"type"</span>];</span><br><span class="line">        $errfile = $error[<span class="string">"file"</span>];</span><br><span class="line">        $errline = $error[<span class="string">"line"</span>];</span><br><span class="line">        $errstr  = $error[<span class="string">"message"</span>];</span><br><span class="line">        error_handler($errno,$errstr,$errfile,$errline);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取所有的error</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error_handler</span><span class="params">($errno,$errstr,$errfile,$errline)</span></span>&#123;</span><br><span class="line">$str=<span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">     "errno":<span class="subst">$errno</span></span></span><br><span class="line"><span class="string">     "errstr":<span class="subst">$errstr</span></span></span><br><span class="line"><span class="string">     "errfile":<span class="subst">$errfile</span></span></span><br><span class="line"><span class="string">     "errline":<span class="subst">$errline</span></span></span><br><span class="line"><span class="string">EOF;</span></span><br><span class="line"><span class="comment">//获取到错误可以自己处理，比如记Log、报警等等</span></span><br><span class="line"><span class="keyword">echo</span> $str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span><span class="params">($arr = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    <span class="comment">//外层循环$len-1次</span></span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt; $len; $i++) &#123;</span><br><span class="line">        <span class="comment">//从剩余$len-$i+1个数中冒泡出最大的数(注意索引下标是从0开始)</span></span><br><span class="line">        <span class="keyword">for</span> ($k = <span class="number">0</span>; $k &lt; $len - $i; $k++) &#123;</span><br><span class="line">            <span class="comment">//比较相邻两数,如果前一个比后一个数大,则交换位置</span></span><br><span class="line">            <span class="keyword">if</span> ($arr[$k] &gt; $arr[$k + <span class="number">1</span>]) &#123;</span><br><span class="line">                $tmp         = $arr[$k];</span><br><span class="line">                $arr[$k]     = $arr[$k + <span class="number">1</span>];</span><br><span class="line">                $arr[$k + <span class="number">1</span>] = $tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span><span class="params">($arr = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    <span class="comment">//外层循环$len次</span></span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $len; $i++) &#123;</span><br><span class="line">        <span class="comment">//假设当前值为最小值</span></span><br><span class="line">        $minIndex = $i;</span><br><span class="line">        <span class="keyword">for</span> ($k = $i; $k &lt; $len; $k++) &#123;</span><br><span class="line">            <span class="comment">//当期值比最小值小 则重新赋值最小值索引</span></span><br><span class="line">            <span class="keyword">if</span> ($arr[$k] &lt; $arr[$minIndex]) &#123;</span><br><span class="line">                $minIndex = $k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果最小值索引与初始不等,则选择最小值与当前值交换</span></span><br><span class="line">        <span class="keyword">if</span> ($minIndex != $i) &#123;</span><br><span class="line">            $tmp            = $arr[$minIndex];</span><br><span class="line">            $arr[$minIndex] = $arr[$i];</span><br><span class="line">            $arr[$i]        = $tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span><span class="params">($arr = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    <span class="comment">//外层循环$len-1次</span></span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt; $len; $i++) &#123;</span><br><span class="line">        <span class="comment">//赋值准备插入的值</span></span><br><span class="line">        $tmp = $arr[$i];</span><br><span class="line">        <span class="comment">//数组倒序比较的方式</span></span><br><span class="line">        <span class="keyword">for</span> ($k = $i - <span class="number">1</span>; $k &gt;= <span class="number">0</span>; $k--) &#123;</span><br><span class="line">            <span class="comment">//如果当前值比要插入的值大,就交换</span></span><br><span class="line">            <span class="keyword">if</span> ($arr[$k] &gt; $tmp) &#123;</span><br><span class="line">                $arr[$k + <span class="number">1</span>] = $arr[$k];</span><br><span class="line">                $arr[$k]     = $tmp;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//因为前面已经排好序,这里直接跳出内层循环</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span><span class="params">($arr = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    <span class="keyword">if</span> ($len &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> $arr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//默认基准值为第一个数</span></span><br><span class="line">    $baseNum  = $arr[<span class="number">0</span>];</span><br><span class="line">    $leftArr  = [];</span><br><span class="line">    $rightArr = [];</span><br><span class="line">    <span class="comment">//从数组第二个开始与基准值比较</span></span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt; $len; $i++) &#123;</span><br><span class="line">        <span class="comment">//注意需要考虑有相同值的情况</span></span><br><span class="line">        <span class="keyword">if</span> ($arr[$i] &lt;= $baseNum) &#123;</span><br><span class="line">            $leftArr[] = $arr[$i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $rightArr[] = $arr[$i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//递归合并数组</span></span><br><span class="line">    <span class="keyword">return</span> array_merge(quickSort($leftArr), [$baseNum], quickSort($rightArr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/nginx/nginx/nginx-pei-zhi-zhi-chi-https/" rel="next" title="nginx配置支持https">
+                <i class="fa fa-chevron-left"></i> nginx配置支持https
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/docker/docker/docker-xia-phpstorm-shi-yong-xdebug/" rel="prev" title="docker下phpstorm使用xdebug">
+                docker下phpstorm使用xdebug <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ooqid2far.bkt.clouddn.com/myblog/%E5%A4%A7%E7%BE%9A%E7%BE%8A%E5%A4%B4%E5%83%8F-big.jpg!ratio.200"
+                alt="oryxtc" />
+            
+              <p class="site-author-name" itemprop="name">oryxtc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/oryxtc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php代码块"><span class="nav-number">1.</span> <span class="nav-text">php代码块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#货号单-0000001的生成方法"><span class="nav-number">1.1.</span> <span class="nav-text">货号单 0000001的生成方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过goole-Api以经纬度获取城市名"><span class="nav-number">1.2.</span> <span class="nav-text">通过goole Api以经纬度获取城市名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成uuid方法"><span class="nav-number">1.3.</span> <span class="nav-text">生成uuid方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证身份证函数"><span class="nav-number">1.4.</span> <span class="nav-text">验证身份证函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密解密函数"><span class="nav-number">1.5.</span> <span class="nav-text">加密解密函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#菜单栏数据引用赋值实现"><span class="nav-number">1.6.</span> <span class="nav-text">菜单栏数据引用赋值实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#菜单栏数据递归实现"><span class="nav-number">1.7.</span> <span class="nav-text">菜单栏数据递归实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动捕获Fatal-Error"><span class="nav-number">1.8.</span> <span class="nav-text">自动捕获Fatal Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.9.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">1.10.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">1.11.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">1.12.</span> <span class="nav-text">快速排序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oryxtc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery-2.1.4.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/fastclick-1.0.6.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.lazyload-1.9.7.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/velocity-1.5.0.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="http://ooqjlzyhw.bkt.clouddn.com/jquery.fancybox-3.0.0.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://oryxtc.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://oryxtc.win/php/php/php-dai-ma-kuai/';
+          this.page.identifier = 'php/php/php-dai-ma-kuai/';
+          this.page.title = 'php代码块';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://oryxtc.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ooqj15229.bkt.clouddn.com/instantsearch-1.11.6.min.css">
+
+  
+  
+    
+  
+  <script src="http://ooqjlzyhw.bkt.clouddn.com/instantsearch-1.11.6.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook,GooglePlus";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
